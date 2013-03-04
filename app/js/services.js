@@ -41,14 +41,4 @@ app.service('Switch', function($http) {
 });
 
 
-app.factory('Switch2', function($resource){
-  return $resource('http://10.0.1.25:port/switches', 
-  	{port:':8000'},//parameters 
-  	{
-    	query: {method:'GET', isArray:true},
-    	get: {method:'GET', params: {id: 0}}
-  	});
-});
-
-
 

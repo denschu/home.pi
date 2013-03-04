@@ -1,0 +1,20 @@
+<div class="container">
+	<table class="table table-hover">
+		<tbody>
+			<tr ng-repeat="switch in switches">
+				<td>
+					<h2>{{switch.name}}</h2>
+					<div class="btn-group" data-toggle="buttons-radio">
+					    <button type="button" class="btn btn-success" ng-click="turnSwitchOn(switch.id)">On</button>
+					    <button type="button" class="btn btn-danger" ng-click="turnSwitchOff(switch.id)">Off</button>
+					 </div>
+				</td>
+			</tr>
+		</tbody>
+	 </table>	
+</div>
+
+<!--div class="btn-group" ng-model="status" bs-buttons-radio>
+<button type="button" class="btn" value="1">On</button>
+<button type="button" class="btn" value="0">Off</button>
+</div-->

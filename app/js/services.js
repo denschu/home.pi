@@ -4,13 +4,15 @@
 
 var app = angular.module('homePiApp.services', ['ngResource']);
 
+var url = "http://10.0.1.25:8000/switches";
+
 app.value('version', '1.0');
 
 app.service('Switch', function($http) {
 
   this.query = function() {
   	console.log("Returning Switches");
-	return $http.get("http://10.0.1.25:8000/switches").then(function (response) {
+	  return $http.get(url).then(function (response) {
 	    console.log(response);
 	    return response.data;
 	});
@@ -18,9 +20,9 @@ app.service('Switch', function($http) {
 
   this.turnOn = function(id) {
   	console.log(id);
-  	var status = '{"status": "1"}';
-  	console.log(status);
-  	return $http.put("http://10.0.1.25:8000/switches/" + id,status).then(function (response) {
+  	var request = '{"status": "1"}';
+  	console.log(request);
+  	return $http.put(url + "/" + id,request).then(function (response) {
 	    console.log(response);
 	    return response.data;
 	});
@@ -28,9 +30,9 @@ app.service('Switch', function($http) {
 
   this.turnOff = function(id) {
   	console.log(id);
-  	var status = '{"status": "0"}';
-  	console.log(status);
-  	return $http.put("http://10.0.1.25:8000/switches/" + id,status).then(function (response) {
+  	var request = '{"status": "0"}';
+  	console.log(request);
+  	return $http.put(url + "/" + id,request).then(function (response) {
 	    console.log(response);
 	    return response.data;
 	});
@@ -40,10 +42,13 @@ app.service('Switch', function($http) {
 
 
 app.factory('Switch2', function($resource){
-  return $resource('http://10.0.1.25:8000/switches', 
-  	{},//parameters 
+  return $resource('http://10.0.1.25:port/switches', 
+  	{port:':8000'},//parameters 
   	{
-    	query: {method:'GET', isArray:true, params: {}},
+    	query: {method:'GET', isArray:true},
     	get: {method:'GET', params: {id: 0}}
   	});
 });
+
+
+

@@ -12,7 +12,7 @@ describe('HomePi App', function() {
  
  
     it('should show the switch list as user starts the app', function() {
-      //expect(repeater('.switches li').count()).toBe(3);
+      expect(repeater('.table tr').count()).toBe(3);
     });
   });
 });

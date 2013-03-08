@@ -4,7 +4,8 @@
 
 var app = angular.module('homePiApp.services', ['ngResource']);
 
-var url = "http://10.0.1.25:8000/switches";
+//var url = "http://10.0.1.25:8000/switches";
+var url = "http://rcswitch.apiary.io/switches";
 
 app.value('version', '1.0');
 

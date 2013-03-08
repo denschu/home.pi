@@ -4,8 +4,8 @@
 
 var app = angular.module('homePiApp.services', ['ngResource']);
 
-//var url = "http://10.0.1.25:8000/switches";
-var url = "http://rcswitch.apiary.io/switches";
+var url = "http://10.0.1.25:8000/switches";
+//var url = "http://rcswitch.apiary.io/switches";
 
 app.value('version', '1.0');
 
@@ -37,6 +37,26 @@ app.service('Switch', function($http) {
 	    console.log(response);
 	    return response.data;
 	});
+  };
+
+  this.turnAllSwitchesOn = function() {
+    console.log("Turning on all switches");
+    var request = '{"status": "1"}';
+    console.log(request);
+    return $http.put(url,request).then(function (response) {
+      console.log(response);
+      return response.data;
+  });
+  };
+
+  this.turnAllSwitchesOff = function() {
+    console.log("Turning off all switches");
+    var request = '{"status": "0"}';
+    console.log(request);
+    return $http.put(url,request).then(function (response) {
+      console.log(response);
+      return response.data;
+  });
   };
 
 });

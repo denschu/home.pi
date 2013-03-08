@@ -1,6 +1,15 @@
 <div class="container">
 	<table class="table table-hover">
 		<tbody>
+			<tr>
+				<td>
+					<h2>All</h2>
+					<div class="btn-group" data-toggle="buttons-radio">
+					    <button type="button" class="btn btn-success" ng-click="turnAllSwitchesOn()">On</button>
+					    <button type="button" class="btn btn-danger" ng-click="turnAllSwitchesOff()">Off</button>
+					 </div>
+				</td>
+			</tr>
 			<tr ng-repeat="switch in switches">
 				<td>
 					<h2>{{switch.name}}</h2>

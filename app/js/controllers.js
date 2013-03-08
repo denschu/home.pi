@@ -15,6 +15,14 @@ function SwitchListCtrl($scope, $http, Switch) {
     Switch.turnOff(id)
   };
 
+  $scope.turnAllSwitchesOn = function () {
+  	Switch.turnAllSwitchesOn()
+  };
+
+  $scope.turnAllSwitchesOff = function () {
+  	Switch.turnAllSwitchesOff()
+  };
+
 }
 
 

@@ -1,5 +1,4 @@
 #!/bin/bash
 #
 # 
-nohup ./scripts/web-server.js > /tmp/homepi.log &
-
+nohup node src/server.js > /home/pi/logs/rcswitch-rest.log &

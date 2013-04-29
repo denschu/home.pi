@@ -1,14 +1,2 @@
 **/.DS_Store
-nbproject
-manifest.mf
-build.xml
-
-.project
-.settings
-.idea/*
-
-app/css/.DS_Store
-
-app/lib/.DS_Store
-
-.DS_Store
+node_modules

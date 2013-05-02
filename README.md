@@ -1,16 +1,16 @@
-# Home.Pi Server
+# Home.Pi 
 =============
 
-#RESTful Server for Home Automation based on node.js, express, ...
+#Home Automation with node.js, express and AngularJS
 
 ##Setup 
 
 	npm install
+	grunt
 
-## Start Server headless and the AngularJS-Client
+## Start 
 
 	/etc/init.d/homepi start
-
 
 
 ##Features

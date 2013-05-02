@@ -4,8 +4,16 @@
 var express = require('express'),
     api = require('./routes/api');
 var app = express();
+var server = require('http').createServer(app);
 
 // Configuration
+
+try {
+  // use livereload middleware
+  app.use(require('grunt-contrib-livereload/lib/utils').livereloadSnippet);
+} catch(ex) {
+  //no such thing in production
+}
 
 // ## CORS middleware
 // 
@@ -31,18 +39,24 @@ app.configure(function(){
 });
 
 
-app.get('/devices', api.devices);
-app.get('/devices/:id', api.device);
-app.post('/devices', api.addDevice);
-app.put('/devices/:id', api.editDevice);
-app.put('/devices', api.editAllDevices);
-app.del('/devices/:id', api.deleteDevice);
+app.get('/api/devices', api.devices);
+app.get('/api/devices/:id', api.device);
+app.post('/api/devices', api.addDevice);
+app.put('/api/devices/:id', api.editDevice);
+app.put('/api/devices', api.editAllDevices);
+app.del('/api/devices/:id', api.deleteDevice);
 
-//app.get('/devices/:id/commands', api.commands);
-//app.get('/devices/:id/commands/:cid', api.command);
-//app.put('/devices/:id/commands/:cid', api.editCommand);
+
+
+exports = module.exports = server;
+
+exports.use = function() {
+  app.use.apply(app, arguments);
+};
+
+exports.express = express;
 
 
 // Start server
-app.listen(8000);
-console.log("Server running at http://127.0.0.1:8000/");
+//app.listen(8000);
+//console.log("Server running at http://127.0.0.1:8000/");

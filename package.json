@@ -52,7 +52,7 @@
     "grunt-google-cdn": "~0.1.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-shell": "~0.2.2",
-    "grunt-express": "~0.2.0"
+    "grunt-express": "~0.3.3"
   },
   "engines": {
     "node": ">=0.8.0"

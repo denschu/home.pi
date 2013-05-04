@@ -22,6 +22,7 @@
 ** WakeOnLAN (wol) (planned)
 ** GPIO-PIN (RPi) (planned)
 ** IFTT (planned)
+** REST
 
 
 * Devices

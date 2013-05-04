@@ -1,5 +1,4 @@
 #! /bin/sh
-
 scp app.js pi@raspberrypi.local:home.pi/app.js
 scp package.json pi@raspberrypi.local:home.pi/package.json
 scp -r dist pi@raspberrypi.local:home.pi/dist

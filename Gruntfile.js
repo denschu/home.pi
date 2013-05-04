@@ -23,18 +23,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
-      },
-      compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['compass']
-      },
       livereload: {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -78,12 +66,11 @@ module.exports = function (grunt) {
         }
       }
     },
-
     express: {
       livereload: {
         options: {
           port: 9000,
-          bases: [path.resolve('.tmp'), path.resolve(yeomanConfig.app)],
+          bases: [path.resolve('.tmp'),path.resolve(yeomanConfig.app)],
           monitor: {},
           debug: true,
           server: path.resolve('server/express')
@@ -100,7 +87,6 @@ module.exports = function (grunt) {
         tasks: 'express-restart:livereload'
       }
     },
-
     open: {
       server: {
         url: 'http://localhost:<%= connect.options.port %>'
@@ -141,43 +127,6 @@ module.exports = function (grunt) {
       e2e: {
         configFile: 'karma-e2e.conf.js',
         singleRun: true
-      }
-    },
-    coffee: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
-    },
-    compass: {
-      options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
-        importPath: '<%= yeoman.app %>/components',
-        relativeAssets: true
-      },
-      dist: {},
-      server: {
-        options: {
-          debugInfo: true
-        }
       }
     },
     concat: {
@@ -301,27 +250,31 @@ module.exports = function (grunt) {
         command : './scripts/deploy.sh'
       },
       install : {
-        command : 'ssh pi@raspberrypi.local "cd home.pi-tmp; npm install --production"'
+        command : 'ssh pi@raspberrypi.local "cd home.pi; npm install --production"'
       }
     }
   });
 
   grunt.renameTask('regarde', 'watch');
 
-  grunt.registerTask('server', [
+  grunt.registerTask('server-client', [
     'clean:server',
-    'coffee:dist',
-    'compass:server',
     'livereload-start',
     'connect:livereload',
     'open',
     'watch'
   ]);
 
+  grunt.registerTask('server', [
+    'clean:server',
+    'livereload-start',
+    'express:livereload',
+    'open',
+    'watch'
+  ]);
+
   grunt.registerTask('test', [
     'clean:server',
-    'coffee',
-    'compass',
     'connect:test',
     'karma:continuous'
   ]);
@@ -329,9 +282,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'jshint',
-    'test',
-    'coffee',
-    'compass:dist',
+    //'test',
     'useminPrepare',
     'imagemin',
     'cssmin',
@@ -345,16 +296,6 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
-  grunt.registerTask('express-server', [
-    'clean:server',
-    'coffee:dist',
-    'compass:server',
-    'livereload-start',
-    'express:livereload',
-    'open',
-    'watch'
-  ]);
-
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('deploy', ['shell:publish']);
+  grunt.registerTask('deploy', ['build','shell:deploy']);
 };

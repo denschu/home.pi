@@ -90,15 +90,7 @@ exports.editDevice = function (req, res) {
   if (id >= 0 && id <= data.length) {
     console.log('req.body.state:' + req.body.state);
     console.log('data[id].commands[0]:' + data[id].commands[0].name);
-    for (var i=0;i<data[id].commands.length;i++){ 
-      if(data[id].commands[i].name == req.body.state){
-        console.log('Change status of device with id ' + id + " to " + req.body.state);
-        var command = data[id].commands[i].command;
-        deviceStatus(command);
-        data[id].state = req.body.state;
-        res.send(200);
-      }
-    }
+    changeDeviceState(id, req.body.state);
     res.send(200);
   } else {
     res.json(404);
@@ -109,9 +101,8 @@ exports.editDevice = function (req, res) {
 exports.editAllDevices = function (req, res) {
   console.log('Change status of all devices to ' + req.body.status);
   for (var i=0;i<data.length;i++){ 
-    var command = data[i].command;
-    deviceStatus(command);
-    data[i].status = req.body.state;
+    var id = data[i].id;
+    changeDeviceState(id, req.body.state);
   }
   res.send(200);
 };
@@ -128,8 +119,18 @@ exports.deleteDevice= function (req, res) {
   }
 };
 
+function changeDeviceState(id, state){
+  for (var i=0;i<data[id].commands.length;i++){ 
+      if(data[id].commands[i].name == state){
+        console.log('Change status of device with id ' + id + " to " + state);
+        var command = data[id].commands[i].command;
+        executeShellCommand(command);
+        data[id].state = state;
+      }
+  }
+}
 
-function deviceStatus(command){
+function executeShellCommand(command){
     console.log("Executing command: " + command);
     exec(command, puts);
     sleep.sleep(1);//sleep for 1 seconds

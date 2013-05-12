@@ -19,7 +19,7 @@ case "$1" in
     echo "Starting homepi"
     # run application you want to start
     cd /home/pi/home.pi
-    nohup node app > /home/pi/logs/home.pi.log &
+    nohup node app > /home/pi/logs/homepi.log &
     ;;
   stop)
     echo "Stopping homepi"

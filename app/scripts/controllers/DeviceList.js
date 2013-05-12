@@ -2,7 +2,7 @@
 
 angular.module('homePiApp').controller('DeviceListCtrl', function ($scope, $http, Device) {
 
-	$scope.switches = $http.get('/api/devices').
+	$scope.devices = $http.get('/api/devices').
 	    success(function(data) {
 	      console.log('Returning Devices' + JSON.stringify(data));
 	      $scope.devices = data;

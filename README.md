@@ -54,7 +54,7 @@
 ### Turn device on
     curl -i -X PUT -H 'Content-Type: application/json' -d '{"state": "on"}' http://raspberrypi:8000/devices/0
 
-###Turn device off
+### Turn device off
     curl -i -X PUT -H 'Content-Type: application/json' -d '{"state": "off"}' http://raspberrypi:8000/devices/0
  
 ### Remove device configuration
@@ -65,15 +65,14 @@
 
 ## Platform
 * node.js
-** Express (HTTP/Web Server)
-** Architect (for plugin architecture)
+* Express (HTTP/Web Server)
 
 ## Persistence
-* InMemory-DB?
+* InMemory
 
 ## GUI
 * AngularJS
-* KendoUI
+* KendoUI (planned)
 
 ## Development
 * Grunt

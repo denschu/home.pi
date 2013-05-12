@@ -46,6 +46,9 @@ app.put('/api/devices/:id', api.editDevice);
 app.put('/api/devices', api.editAllDevices);
 app.del('/api/devices/:id', api.deleteDevice);
 
+app.get('/api/groups', api.groups);
+app.get('/api/groups/:group', api.group);
+
 
 
 exports = module.exports = server;

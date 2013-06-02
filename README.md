@@ -1,9 +1,15 @@
 # Home.Pi 
 =============
 
-#Home Automation with node.js, express and AngularJS
+*Home Automation with node.js, AngularJS and MQTT*
 
-##Setup 
+## Features
+
+* Home Automation Bus based on MQTT
+* Customizable
+
+
+## Setup 
 
 	npm install
 	grunt
@@ -13,17 +19,13 @@
 	mosquitto (on Mac: /usr/local/opt/mosquitto/sbin/mosquitto)
 	/etc/init.d/homepi start
 
+### Interfaces
 
-## Features
+* AngularJS
+* REST-API
+* Shell-API
 
-### Devices
-* List all devices
-* Add/Remove device 
-* Groups (planned)
-  * Group devices together
-  * Show a group view
-
-### MQTT Bindings (publish/subscribe)
+### MQTT Bindings
 
 * Shell (Execute shell commands like "sudo shutdown -h now")
 * Infrarot

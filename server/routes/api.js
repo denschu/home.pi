@@ -2,60 +2,19 @@
 var util = require('util');
 var exec = require('child_process').exec;
 var sleep = require('sleep');
+var fs = require('fs');
 
 //Shell Client
 // homepi <id> <command>
-// homepi 0 ON --> curl -i -X PUT -H 'Content-Type: application/json' -d '{"state": "on"}' http://raspberrypi:8080/devices/0
+// homepi 0 ON 
+//--> curl -i -X PUT -H 'Content-Type: application/json' -d '{"state": "on"}' http://raspberrypi:8080/devices/0
+//--> mosquitto_pub -d -t home/world -m "on"
 
-var data = [
-    {
-      "id": "stehlampe_wand",
-      "name": "Stehlampe Wand",
-      "gui_type": "on_off",
-      "type": "shell",
-      "state": "off",
-      "group": "wohnzimmer",
-      "commands": [
-        { "name": "on", "command": "sudo /home/pi/rcswitch-pi/sendRev B 1 1" },
-        { "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 1 0" }
-      ]
-    },
-    {
-      "id": "stehlampe_couch",
-      "name": "Stehlampe Couch",
-      "gui_type": "on_off",
-      "type": "shell",
-      "state": "off",
-      "group": "wohnzimmer",
-      "commands": [
-        { "name": "on", "command": "sudo /home/pi/rcswitch-pi/sendRev B 2 1" },
-        { "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 2 0" }
-      ]
-    },
-    {
-      "id": "lampe_gruen",
-      "name": "Lampe grün",
-      "gui_type": "on_off",
-      "type": "shell",
-      "state": "off",
-      "group": "wohnzimmer_schrank",
-      "commands": [
-        { "name": "on", "command": "sudo /home/pi/rcswitch-pi/sendRev B 3 1" },
-        { "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 3 0" }
-      ]
-    }
-    //{
-    //  "id": 1,
-    //  "name": "Apple TV",
-    //  "gui_type": "send",
-    //  "type": "shell",
-    //  "state": null,
-    //  "commands": [
-    //    { "name": "power_on", "command": "irsend send_once apple_a1294 menu" }
-    //  ]
-    //}
-  ];
-
+var data = JSON.parse(fs.readFileSync(__dirname+'/devices.json').toString());
+        data.forEach(function (device) { 
+          console.log('Loading Device: ' + device.id);
+        });
+        console.log('Finished loading device configuration.');
 
 var groups = {
    wohnzimmer: "Wohnzimmer",

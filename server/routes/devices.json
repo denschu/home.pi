@@ -1,0 +1,49 @@
+[
+    {
+      "id": "stehlampe_wand",
+      "name": "Stehlampe Wand",
+      "widget": "on_off",
+      "type": "shell",
+      "state": "off",
+      "group": "wohnzimmer",
+      "commands": [
+        { "name": "on", "command": "sudo /home/pi/rcswitch-pi/sendRev B 1 1" },
+        { "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 1 0" }
+      ]
+    },
+    {
+      "id": "stehlampe_couch",
+      "name": "Stehlampe Couch",
+      "widget": "on_off",
+      "type": "shell",
+      "state": "off",
+      "group": "wohnzimmer",
+      "commands": [
+        { "name": "on", "command": "sudo /home/pi/rcswitch-pi/sendRev B 2 1" },
+        { "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 2 0" }
+      ]
+    },
+    {
+      "id": "lampe_gruen",
+      "name": "Lampe grün",
+      "widget": "on_off",
+      "type": "shell",
+      "state": "off",
+      "group": "wohnzimmer_schrank",
+      "commands": [
+        { "name": "on", "command": "sudo /home/pi/rcswitch-pi/sendRev B 3 1" },
+        { "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 3 0" }
+      ]
+    },
+    {
+      "id": "apple_tv",
+      "name": "Apple TV",
+      "widget": "toggle",
+      "type": "shell",
+      "state": null,
+      "group": "wohnzimmer_ir",
+      "commands": [
+        { "name": "power_on", "command": "irsend send_once apple_a1294 menu" }
+      ]
+    }
+  ]

@@ -10,20 +10,11 @@
 
 ## Start 
 
+	mosquitto (on Mac: /usr/local/opt/mosquitto/sbin/mosquitto)
 	/etc/init.d/homepi start
 
 
 ## Features
-
-### Bindings
-* Shell (Execute shell commands like "sudo shutdown -h now")
-* IR
-* ELV Max! (planned)
-* WakeOnLAN (wol) (planned)
-* GPIO-PIN (RPi) (planned)
-* IFTT (planned)
-* REST
-
 
 ### Devices
 * List all devices
@@ -32,12 +23,70 @@
   * Group devices together
   * Show a group view
 
+### MQTT Bindings (publish/subscribe)
+
+* Shell (Execute shell commands like "sudo shutdown -h now")
+* Infrarot
+* ELV Max! (planned)
+* WakeOnLAN (wol) (planned)
+* GPIO-PIN (RPi) (planned)
+* IFTT (planned)
+* REST
+
+### MQTT topic conventions
+
+#### Set Value Topics
+
+* /home/rooms/*zone*/*binding*/*deviceName*/state/set
+* Payload: state (ON,OFF)
+
+#### Get Value Topics
+
+* Topic: /home/rooms/*zone*/*binding*/*deviceName*/state 
+* Payload: command (ON,OFF,TOGGLE)
+
+#### Configuration Topics
+
+* Topic: /home/rooms/*zone*/*binding*/*deviceName*/config/name 
+* Payload: Name of the device
+
+#### Device Event Topics
+
+* Topic: /home/rooms/*zone*/*binding*/*deviceName*/event
+* Payload: Eventname
+
+### Shell
+
+#### Publish Topics
+
+* /home/rooms/*zone*/lights/*deviceName*/state/set
+* Payload: state (ON,OFF)
+
+#### Subscribe Topics
+
+* Topic: /home/rooms/*zone*/lights/*deviceName*/state
+* Payload: command (ON,OFF,TOGGLE)
+
+
+### Infrarot
+
+#### Publish Topics
+
+* /home/rooms/*zone*/infrarot/*deviceName*/state/set
+* Payload: state (ON,OFF)
+
+#### Subscribe Topics
+
+* Topic: /home/rooms/*zone*/infrarot/*deviceName*/state
+* Payload: command (SEND)
+
+
 ### Configuration (planned)
 * Show configuration
 * Edit configuration
 
 ### Events (planned)
-* Create a event reaction for a device
+* React to a event from a device (Subscribe to topic based on MQTT)
 * Send an event from a device
 
 
@@ -78,6 +127,16 @@
 * Grunt
 * Karma
 * SublimeText2
+
+# Test MQTT Broker
+
+mosquitto
+mosquitto_sub -d -t home/world
+mosquitto_pub -d -t home/world -m "Message To Send"
+
+
+
+
 
 
 For further informations and setup instructions please refer to my [blog post](http://blog.codecentric.de/en/2013/03/home-automation-with-angularjs-and-node-js-on-a-raspberry-pi).

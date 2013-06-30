@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('homePiApp', [])
+var app = angular.module('homePiApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

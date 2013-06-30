@@ -7,80 +7,88 @@
 
 * Home Automation Bus based on MQTT
 * Customizable
+* Completely independent from the used technology (most bindings are written in node.js)
+* Home.Pi is just a set of MQTT Topic Conventions 
 
 
 ## Setup 
 
 	npm install
 	grunt
+	
 
 ## Start 
 
 	mosquitto (on Mac: /usr/local/opt/mosquitto/sbin/mosquitto)
-	/etc/init.d/homepi start
+
+	mosquitto_pub -d -r -t home/devices/light_1/config/name -m "Lamp 1"
+	mosquitto_pub -d -r -t home/devices/light_1/config/type -m "on_off"
+	mosquitto_pub -d -r -t home/devices/light1/config/command/on  -m "echo turnOn"
+	mosquitto_pub -d -r -t home/devices/light1/config/command/off  -m "echo turnOff"
+
+	/etc/init.d/homepi start (forever start interfaces/angularjs/app.js)
 
 ### Interfaces
 
 * AngularJS
+* Websocket (Socket.IO)
 * REST-API
-* Shell-API
 
-### MQTT Bindings
+### MQTT Bindings (separate git-Repositories)
 
 * Shell (Execute shell commands like "sudo shutdown -h now")
 * Infrarot
-* ELV Max! (planned)
-* WakeOnLAN (wol) (planned)
-* GPIO-PIN (RPi) (planned)
-* IFTT (planned)
+* ELV Max! 
+* WakeOnLAN (wol) 
+* GPIO-PIN (RPi) 
+* IFTT 
 * REST
 
 ### MQTT topic conventions
 
-#### Set Value Topics
+home/devices/light1/state ON
+home/devices/light1/state/set ON
 
-* /home/rooms/*zone*/*binding*/*deviceName*/state/set
-* Payload: state (ON,OFF)
+home/devices/light_1/config/command/on
+home/devices/light_1/config/command/toggle
+home/devices/light_1/config/command/off
 
-#### Get Value Topics
+#### GUI Topics
+home/devices/light_1/config/name "Lamp 1"
 
-* Topic: /home/rooms/*zone*/*binding*/*deviceName*/state 
+home/devices/light_1/config/type on_off
+home/devices/light_1/config/type sensor
+
+Get all devices: 			home/devices/+/config/name
+Get all types:			 	home/devices/+/config/type
+Get all possible commands: 	home/devices/+/config/command/+
+
+#### Set State Topics
+
+* /home/devices/*deviceName*/state/set
 * Payload: command (ON,OFF,TOGGLE)
 
-#### Configuration Topics
+#### Get State Topics
 
-* Topic: /home/rooms/*zone*/*binding*/*deviceName*/config/name 
-* Payload: Name of the device
+* Topic: /home/devices/*deviceName*/state 
+* *zone* = Room, all
+* Payload: state (ON,OFF)
+
+#### Device Configuration Topics
+
+* Topic: e.g. /home/devices/*deviceName*/config/name 
+* Payload: e.g. Name of the device
 
 #### Device Event Topics
 
-* Topic: /home/rooms/*zone*/*binding*/*deviceName*/event
-* Payload: Eventname
-
-### Shell
-
-#### Publish Topics
-
-* /home/rooms/*zone*/lights/*deviceName*/state/set
-* Payload: state (ON,OFF)
-
-#### Subscribe Topics
-
-* Topic: /home/rooms/*zone*/lights/*deviceName*/state
-* Payload: command (ON,OFF,TOGGLE)
+* Topic: /home/events/*eventName*
+* Payload: ?
 
 
-### Infrarot
+#### Group Topics
 
-#### Publish Topics
-
-* /home/rooms/*zone*/infrarot/*deviceName*/state/set
-* Payload: state (ON,OFF)
-
-#### Subscribe Topics
-
-* Topic: /home/rooms/*zone*/infrarot/*deviceName*/state
-* Payload: command (SEND)
+* /home/groups/*groupName*/state/set
+* Payload: command (e.g. ALL_OFF)
 
 
 ### Configuration (planned)
@@ -94,10 +102,7 @@
 
 ## REST API
 
-[Documentation on apiary.io](http://apiary.io/home.pi-server)
-
-### Add a new device to the configuration
-	curl -i -X POST -H 'Content-Type: application/json' -d '{"id": 0,"name": "Stehlampe Wand","type": "on_off", "state": "off","commands": [{ "name": "on", "command": "sudo /home/pi/rcdevice-pi/sendRev B 1 1" },{ "name": "off", "command": "sudo /home/pi/rcswitch-pi/sendRev B 1 0" }]}' http://raspberrypi:8000/devices
+[Documentation on apiary.io](http://apiary.io/home.pi)
 
 ### Get the list of active devices
 	curl -i -X GET http://raspberrypi:8000/devices
@@ -107,9 +112,6 @@
 
 ### Turn device off
     curl -i -X PUT -H 'Content-Type: application/json' -d '{"state": "off"}' http://raspberrypi:8000/devices/0
- 
-### Remove device configuration
-	curl -i -X DELETE http://raspberrypi:8000/devices/0
 
 
 # Technologies/Frameworks
@@ -129,16 +131,5 @@
 * Grunt
 * Karma
 * SublimeText2
-
-# Test MQTT Broker
-
-mosquitto
-mosquitto_sub -d -t home/world
-mosquitto_pub -d -t home/world -m "Message To Send"
-
-
-
-
-
 
 For further informations and setup instructions please refer to my [blog post](http://blog.codecentric.de/en/2013/03/home-automation-with-angularjs-and-node-js-on-a-raspberry-pi).

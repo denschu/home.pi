@@ -1,12 +1,8 @@
 'use strict';
 
-angular.module('homePiApp').controller('DeviceListCtrl', function ($scope, $http, Device) {
+angular.module('homePiApp').controller('DeviceListCtrl', function ($scope, Device, socket) {
 
-	$scope.devices = $http.get('/api/devices').
-	    success(function(data) {
-	      console.log('Returning Devices' + JSON.stringify(data));
-	      $scope.devices = data;
-	    });
+	$scope.devices = Device.query();
 
 	$scope.turnDeviceOn = function (id) {
 		Device.turnOn(id);

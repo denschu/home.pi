@@ -23,8 +23,8 @@
   "private": true,
   "dependencies": {
     "express": "3.x",
-    "exec": "0.0.5",
-    "sleep": "1.1.0"
+    "mqtt": ">=0.2.10",
+    "socket.io": ">=0.9.16"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

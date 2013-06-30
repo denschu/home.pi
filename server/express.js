@@ -5,6 +5,7 @@ var express = require('express'),
     api = require('./routes/api');
 var app = express();
 var server = require('http').createServer(app);
+var io  = require('socket.io').listen(5000);
 
 // Configuration
 
@@ -41,15 +42,6 @@ app.configure(function(){
 
 app.get('/api/devices', api.devices);
 app.get('/api/devices/:id', api.device);
-app.post('/api/devices', api.addDevice);
-app.put('/api/devices/:id', api.editDevice);
-app.put('/api/devices', api.editAllDevices);
-app.del('/api/devices/:id', api.deleteDevice);
-
-app.get('/api/groups', api.groups);
-app.get('/api/groups/:group', api.group);
-
-
 
 exports = module.exports = server;
 

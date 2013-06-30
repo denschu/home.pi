@@ -1,10 +1,9 @@
 'use strict';
 
+//var url = '/api/devices';
 var url = '/api/devices';
-//var url = 'http://raspberrypi.local:8000/devices';
 
-angular.module('homePiApp')
-  .service('Device', function($http) {
+angular.module('homePiApp').service('Device', function($http, socket) {
 
   this.query = function() {
     console.log('Returning Devices');
@@ -15,43 +14,25 @@ angular.module('homePiApp')
   };
 
   this.turnOn = function(id) {
-    console.log(id);
-    var request = '{"state": "on"}';
-    console.log(request);
-    return $http.put(url + '/' + id,request).then(function (response) {
-      console.log(response);
-      return response.data;
-    });
+    console.log("TurnOn Id=" + id);
+    var topicString = "home/devices/" + id + "/state/set";
+    var data = { topic: topicString, payload: "on"};
+    socket.emit('mqtt',data, null);
   };
 
   this.turnOff = function(id) {
-    console.log(id);
-    var request = '{"state": "off"}';
-    console.log(request);
-    return $http.put(url + '/' + id,request).then(function (response) {
-      console.log(response);
-      return response.data;
-    });
+    console.log("TurnOff Id=" + id);
+    var topicString = "home/devices/" + id + "/state/set";
+    var data = { topic: topicString, payload: "off"};
+    socket.emit('mqtt',data, null);
   };
 
   this.turnAllDevicesOn = function() {
     console.log('Turning on all devices');
-    var request = '{"state": "on"}';
-    console.log(request);
-    return $http.put(url,request).then(function (response) {
-      console.log(response);
-      return response.data;
-    });
   };
 
   this.turnAllDevicesOff = function() {
     console.log('Turning off all devices');
-    var request = '{"state": "off"}';
-    console.log(request);
-    return $http.put(url,request).then(function (response) {
-      console.log(response);
-      return response.data;
-    });
   };
 
 });

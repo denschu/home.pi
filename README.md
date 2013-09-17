@@ -13,20 +13,51 @@
 
 ## Setup 
 
-	npm install
+	npm install or npm install --production
 	grunt
-	
+
+# Setup MQTT Broker
+
+	Mac: brew install mosquitto
+	RPi: apt-get install mosquitto	
+	RPi: sudo /etc/init.d/mosquitto (start/status/stop)
 
 ## Start 
 
-	mosquitto (on Mac: /usr/local/opt/mosquitto/sbin/mosquitto)
+Start the Broker
+
+	mosquitto
+
+Publish the configuration
 
 	mosquitto_pub -d -r -t home/devices/light_1/config/name -m "Lamp 1"
 	mosquitto_pub -d -r -t home/devices/light_1/config/type -m "on_off"
+
+The following commands are examples from the mqtt-exec Binding and are not mandatory for running HomePi
+
 	mosquitto_pub -d -r -t home/devices/light1/config/command/on  -m "echo turnOn"
 	mosquitto_pub -d -r -t home/devices/light1/config/command/off  -m "echo turnOff"
 
-	/etc/init.d/homepi start (forever start interfaces/angularjs/app.js)
+Start HomePi
+
+	/etc/init.d/homepi start 
+
+
+HomePi will publish to the corresponding topics like the similar mosquitto_pub-command:
+
+	mosquitto_pub -d -t /home/devices/light1/state/set -m "on"
+
+
+## Run on bootup
+
+	/opt/node/bin/npm install forever -g
+	sudo update-rc.d homepi defaults
+	sudo update-rc.d -f  homepi remove
+
+## Check status of homepi
+
+	forever list | grep app.js | wc -l | sed -e 's/1/App is running/' | sed -e 's/0/App not started/'
+
 
 ### Interfaces
 

@@ -1,6 +1,5 @@
 //execute commands
 var util = require('util');
-var sleep = require('sleep');
 var mqtt = require('mqtt');
 var io  = require('socket.io').listen(5000);
 

@@ -18,13 +18,18 @@ case "$1" in
   start)
     echo "Starting homepi"
     # run application you want to start
-    cd /home/pi/home.pi
-    nohup node app > /home/pi/logs/homepi.log &
+    NODE_JS_HOME="/opt/node"
+    PATH="$PATH:$NODE_JS_HOME/bin"
+    export PATH
+    /opt/node/bin/forever start /home/pi/home.pi/app.js
     ;;
   stop)
     echo "Stopping homepi"
     # kill application you want to stop
-    killall node
+    NODE_JS_HOME="/opt/node"
+    PATH="$PATH:$NODE_JS_HOME/bin"
+    export PATH
+    /opt/node/bin/forever stop app.js
     ;;
   *)
     echo "Usage: /etc/init.d/homepi {start|stop}"

@@ -1,5 +1,4 @@
 # Home.Pi 
-=============
 
 *Home Automation with node.js, AngularJS and MQTT*
 
@@ -15,6 +14,8 @@
 
 	npm install or npm install --production
 	grunt
+
+Take a look at my [puppet manifests](https://github.com/denschu/homepi-puppet) to setup Home.Pi on a Raspberry Pi very easily.
 
 ### Setup MQTT Broker
 

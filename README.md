@@ -105,56 +105,45 @@ Get all possible commands: 	home/devices/+/config/command/+
 
 #### Set State 
 
-* /home/devices/*deviceName*/state/set
+* /home/devices/<deviceName>/state/set
 * Payload: command (ON,OFF,TOGGLE)
 
 #### Get State
 
-* Topic: /home/devices/*deviceName*/state 
-* *zone* = Room, all
+* Topic: /home/devices/<deviceName>/state 
 * Payload: state (ON,OFF)
 
 #### Configuration Topics
 
-* Topic: e.g. /home/devices/*deviceName*/config/name 
+* Topic: e.g. /home/devices/<deviceName>/config/name 
 * Payload: e.g. Name of the device
-
-#### Device Event Topics
-
-* Topic: /home/events/*eventName*
-* Payload: ?
-
-#### Group Topics
-
-* /home/groups/*groupName*/state/set
-* Payload: command (e.g. ALL_OFF)
-
-
-## Configuration (planned)
-* Show configuration
-* Edit configuration
-
-## Events (planned)
-* React to a event from a device (Subscribe to topic based on MQTT)
-* Send an event from a device
-
 
 ## Technologies/Frameworks
 
 ### Platform
 * node.js
 * Express (HTTP/Web Server)
+* Socket.IO
 
 ### Persistence
 * InMemory
 
 ### GUI
 * AngularJS
-* KendoUI (planned)
 
 ### Development
 * Grunt
 * Karma
 * SublimeText2
+
+## Planned Features
+
+* Show/Edit configuration of a device
+* React to a event from a device (Subscribe to topic based on MQTT)
+* Send an event from a device
+* Integration with [Node-RED](http://nodered.org/)
+* Mobile GUI with KendoUI
+* Add more Bindings
+* ... make a feature request!
 
 For further informations and setup instructions please refer to my [blog post](http://blog.codecentric.de/en/2013/03/home-automation-with-angularjs-and-node-js-on-a-raspberry-pi).

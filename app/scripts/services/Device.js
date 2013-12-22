@@ -1,42 +1,22 @@
 'use strict';
 
-//var url = '/api/devices';
+/* Services */
+
 var url = '/api/devices';
 
-angular.module('homePiApp').service('Device', function($http, socket) {
+var homepiServices = angular.module('homepiServices', ['ngResource']);
 
-  this.query = function() {
-    console.log('Returning Devices');
-    return $http.get(url).then(function (response) {
-      console.log(response);
-      return response.data;
+homepiServices
+  .factory('Device', ['$resource',
+    function($resource){
+      return $resource('api/devices/:deviceId', {deviceId:'@id'}, {
+        query: {method:'GET', isArray:true}
     });
-  };
-
-  this.turnOn = function(id) {
-    console.log("TurnOn Id=" + id);
-    var topicString = "home/devices/" + id + "/state/set";
-    var data = { topic: topicString, payload: "on"};
-    socket.emit('mqtt',data, null);
-  };
-
-  this.turnOff = function(id) {
-    console.log("TurnOff Id=" + id);
-    var topicString = "home/devices/" + id + "/state/set";
-    var data = { topic: topicString, payload: "off"};
-    socket.emit('mqtt',data, null);
-  };
-
-  this.turnAllDevicesOn = function() {
-    console.log('Turning on all devices');
-  };
-
-  this.turnAllDevicesOff = function() {
-    console.log('Turning off all devices');
-  };
-
-});
-
-
-
-
+  }])
+  .factory('DeviceState', ['$resource',
+    function($resource){
+      console.log('DEBUG');
+      return $resource('api/devices/:deviceId/state', {deviceId:'@id'}, {
+        update: {method:'PUT'}
+    });
+  }]);

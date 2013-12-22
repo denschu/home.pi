@@ -1,6 +1,7 @@
-**/.DS_Store
 node_modules
-dist
+public
 .tmp
 .sass-cache
-app/components
+app/bower_components
+heroku
+.DS_Store

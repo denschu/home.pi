@@ -3,7 +3,7 @@
 describe('Controller: DeviceListCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('homePiApp'));
+  beforeEach(module('homepiApp'));
 
   var scope, ctrl, $httpBackend;
   var data = [{id: "0"},{id: "1"}];

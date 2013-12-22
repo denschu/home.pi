@@ -1,0 +1,23 @@
+[
+    {
+      "id": "stehlampe_wand",
+      "name": "Stehlampe Wand",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light1/state/set"
+    },
+    {
+      "id": "stehlampe_couch",
+      "name": "Stehlampe Couch",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light2/state/set"
+    },
+    {
+      "id": "lampe_gruen",
+      "name": "Lampe grün",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light2/state/set"
+    }
+  ]

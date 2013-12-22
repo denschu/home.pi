@@ -1,10 +1,16 @@
 'use strict';
 
-var app = angular.module('homePiApp', [])
+angular.module('homepiApp', [
+  'ngCookies',
+  'ngResource',
+  'ngSanitize',
+  'ngRoute',
+  'homepiServices'
+])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/devices.html',
+        templateUrl: 'views/partials/devices.html',
         controller: 'DeviceListCtrl'
       })
       .otherwise({

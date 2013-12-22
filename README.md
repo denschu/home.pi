@@ -1,13 +1,18 @@
+#TODOs
+
+* Support different control types in the gui: number, dimmer, switch, colour
+
+
 # Home.Pi 
 
-*Home Automation with node.js, AngularJS and MQTT*
+*Simple Home Automation Solution with MQTT*
 
 ## Features
 
-* Home Automation Bus based on MQTT
+* Home Automation based on MQTT
 * Customizable
 * Completely independent from the used technology (most bindings are written in node.js)
-* Home.Pi is just a set of MQTT Topic Conventions 
+* Cloud-based architecture (only the bindings are running locally)
 
 
 ## Setup 
@@ -47,6 +52,8 @@ The following commands are examples from the mqtt-exec Binding and are not manda
 ### Start HomePi
 
 	/etc/init.d/homepi start 
+
+	mosquitto_sub -t home/devices/#
 
 
 HomePi will publish to the corresponding topics like the similar mosquitto_pub-command:

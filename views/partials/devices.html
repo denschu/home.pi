@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <td>
+          <h2>All</h2>
+          <div class="btn-group" data-toggle="buttons-radio">
+              <button type="button" class="btn btn-success" ng-click="turnAllDevicesOn()">On</button>
+              <button type="button" class="btn btn-danger" ng-click="turnAllDevicesOff()">Off</button>
+           </div>
+        </td>
+      </tr>
+      <tr ng-repeat="device in devices">
+        <td>
+          <h2>{{device.name}}</h2>
+          <div class="btn-group" data-toggle="buttons-radio">
+              <button type="button" class="btn btn-success" ng-click="turnDeviceOn(device.id)">On</button>
+              <button type="button" class="btn btn-danger" ng-click="turnDeviceOff(device.id)">Off</button>
+           </div>
+        </td>
+      </tr>
+    </tbody>
+   </table> 
+</div>
+
+<!--div class="btn-group" ng-model="status" bs-buttons-radio>
+<button type="button" class="btn" value="1">On</button>
+<button type="button" class="btn" value="0">Off</button>
+</div-->

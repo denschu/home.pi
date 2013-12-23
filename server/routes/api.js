@@ -5,9 +5,16 @@ var fs = require('fs');
 
 var configuration = JSON.parse(fs.readFileSync(__dirname+'/config.json').toString());
 
-// Create connection to MQTT Broker
-var mqttClient = mqtt.createClient(1883,'localhost', function(err, client) {
-    keepalive: 1000
+
+var mqtt = require('mqtt'), url = require('url');
+// Parse
+var mqtt_url = url.parse(process.env.CLOUDMQTT_URL || 'mqtt://localhost:1883');
+var auth = (mqtt_url.auth || ':').split(':');
+
+// Create a client connection
+var mqttClient = mqtt.createClient(mqtt_url.port, mqtt_url.hostname, {
+  username: auth[0],
+  password: auth[1]
 });
 
 // GET

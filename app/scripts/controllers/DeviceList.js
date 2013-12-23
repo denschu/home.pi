@@ -7,7 +7,7 @@ angular.module('homepiApp')
 
 	$scope.turnDeviceOn = function (id) {
 		var $id = id;
-		var $state = 'on'; 
+		var $state = 'on';
 		DeviceState.update({id:$id, state:$state});
 	};
 
@@ -17,12 +17,4 @@ angular.module('homepiApp')
 		DeviceState.update({id:$id, state:$state});
 	};
 
-	//$scope.turnAllDevicesOn = function () {
-	//	DeviceState.turnAllDevicesOn();
-	//};
-
-	//$scope.turnAllDevicesOff = function () {
-	//	DeviceState.turnAllDevicesOff();
-	//};
-
-  });
+});

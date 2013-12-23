@@ -6,17 +6,17 @@ describe('Controller: DeviceListCtrl', function () {
   beforeEach(module('homepiApp'));
 
   var scope, ctrl, $httpBackend;
-  var data = [{id: "0"},{id: "1"}];
+  var data = [{id: '0'},{id: '1'}];
 
   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/devices').respond(data);
+    $httpBackend.expectGET('api/devices').respond(data);
     scope = $rootScope.$new();
     ctrl = $controller('DeviceListCtrl', {
       $scope: scope
     });
 
-  })); 
+  }));
 
 
   it('should create "devices" model with 2 devices fetched from http', function() {

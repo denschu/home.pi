@@ -3,7 +3,7 @@
 var mqtt = require('mqtt');
 var fs = require('fs');
 
-var configuration = JSON.parse(fs.readFileSync(__dirname+'/config.json').toString());
+//var configuration = JSON.parse(fs.readFileSync(__dirname+'/config.json').toString());
 
 
 var mqtt = require('mqtt'), url = require('url');
@@ -99,3 +99,27 @@ function changeDeviceState(id, state){
     }
   }
 }
+
+var configuration = [
+    {
+      "id": "stehlampe_wand",
+      "name": "Stehlampe Wand",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light1/state/set"
+    },
+    {
+      "id": "stehlampe_couch",
+      "name": "Stehlampe Couch",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light2/state/set"
+    },
+    {
+      "id": "lampe_gruen",
+      "name": "Lampe grün",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light2/state/set"
+    }
+  ];

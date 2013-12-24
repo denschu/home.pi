@@ -5,3 +5,4 @@ public
 app/bower_components
 heroku
 .DS_Store
+homepi.sublime-project

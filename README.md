@@ -1,6 +1,7 @@
 #TODOs
 
 * Support different control types in the gui: number, dimmer, switch, colour
+* heroku config:add NODE_ENV=production
 
 
 # Home.Pi 

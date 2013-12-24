@@ -10,7 +10,7 @@ angular.module('homepiApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/partials/devices.html',
+        templateUrl: 'partials/devices',
         controller: 'DeviceListCtrl'
       })
       .otherwise({

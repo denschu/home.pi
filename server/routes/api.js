@@ -2,16 +2,16 @@
 
 var mqtt = require('mqtt');
 var fs = require('fs');
+var url = require('url');
 
-//var configuration = JSON.parse(fs.readFileSync(__dirname+'/config.json').toString());
+var configuration = JSON.parse(fs.readFileSync(__dirname+'/config.json').toString());
 
-
-var mqtt = require('mqtt'), url = require('url');
 // Parse
 var mqtt_url = url.parse(process.env.CLOUDMQTT_URL || 'mqtt://localhost:1883');
 var auth = (mqtt_url.auth || ':').split(':');
 
-// Create a client connection
+//Creating the MQTT Client
+console.log("Creating client for: " + mqtt_url.hostname);
 var mqttClient = mqtt.createClient(mqtt_url.port, mqtt_url.hostname, {
   username: auth[0],
   password: auth[1]
@@ -94,13 +94,13 @@ function changeDeviceState(id, state){
       var device = configuration[i];
       console.log('Change status of device with id ' + id + " to " + state);
       console.log('Publishing to Topic: '+ device.topic);
-      mqttClient.publish(device.topic,state);
+      mqttClient.publish(device.topic,state,{retain: true});
       device.state = state;
     }
   }
 }
 
-var configuration = [
+var configuration2 = [
     {
       "id": "stehlampe_wand",
       "name": "Stehlampe Wand",
@@ -120,6 +120,20 @@ var configuration = [
       "name": "Lampe grün",
       "type": "on_off",
       "state": "off",
-      "topic": "home/devices/light2/state/set"
+      "topic": "home/devices/light3/state/set"
+    },
+    {
+      "id": "schrank_links",
+      "name": "Schrank links",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light4/state/set"
+    },
+    {
+      "id": "schrank_rechts",
+      "name": "Schrank rechts",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/light5/state/set"
     }
   ];

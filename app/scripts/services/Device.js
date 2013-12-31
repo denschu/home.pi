@@ -13,7 +13,6 @@ homepiServices
     }])
   .factory('DeviceState', ['$resource',
     function($resource){
-      console.log('DEBUG');
       return $resource('api/devices/:deviceId/state', {deviceId:'@id'}, {
         update: {method:'PUT'}
       });

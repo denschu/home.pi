@@ -13,6 +13,10 @@ angular.module('homepiApp', [
         templateUrl: 'partials/devices',
         controller: 'DeviceListCtrl'
       })
+      .when('/configuration', {
+        templateUrl: 'partials/configuration',
+        controller: 'ConfigurationCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

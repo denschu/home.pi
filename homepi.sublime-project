@@ -8,6 +8,30 @@
 		{
 			"follow_symlinks": true,
 			"path": "/Users/denschu/git/mqtt-exec"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/denschu/git/angular-fullstack"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/denschu/git/home.pi-puppet"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Volumes/Home Directory/puppet"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/denschu/git/homA"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/denschu/git/mqtt-suntimes"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/denschu/git/mqtt-rules"
 		}
 	]
 }

@@ -2,6 +2,7 @@
 
 * Support different control types in the gui: number, dimmer, switch, colour
 * heroku config:add NODE_ENV=production
+* Sending retained messages
 
 
 # Home.Pi 
@@ -70,7 +71,7 @@ HomePi will publish to the corresponding topics like the similar mosquitto_pub-c
 
 ### Check status of homepi
 
-	forever list | grep app.js | wc -l | sed -e 's/1/App is running/' | sed -e 's/0/App not started/'
+	forever list | grep server.js | wc -l | sed -e 's/1/App is running/' | sed -e 's/0/App not started/'
 
 
 ## Interfaces
@@ -95,19 +96,6 @@ HomePi will publish to the corresponding topics like the similar mosquitto_pub-c
 
 	home/devices/light1/state ON
 	home/devices/light1/state/set ON
-	home/devices/light_1/config/command/on
-	home/devices/light_1/config/command/toggle
-	home/devices/light_1/config/command/off
-
-### GUI Topics
-
-	home/devices/light_1/config/name "Lamp 1"
-	home/devices/light_1/config/type on_off
-	home/devices/light_1/config/type sensor
-
-Get all devices: 			home/devices/+/config/name
-Get all types:			 	home/devices/+/config/type
-Get all possible commands: 	home/devices/+/config/command/+
 
 ### Device Topics
 
@@ -121,17 +109,12 @@ Get all possible commands: 	home/devices/+/config/command/+
 * Topic: /home/devices/<deviceName>/state 
 * Payload: state (ON,OFF)
 
-#### Configuration Topics
-
-* Topic: e.g. /home/devices/<deviceName>/config/name 
-* Payload: e.g. Name of the device
-
 ## Technologies/Frameworks
 
 ### Platform
 * node.js
 * Express (HTTP/Web Server)
-* Socket.IO
+* MQTT
 
 ### Persistence
 * InMemory

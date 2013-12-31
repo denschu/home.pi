@@ -41,17 +41,16 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">Configuration</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#/configuration">Configuration</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" ng-view="">
 
-      <div class="starter-template" ng-view="">
-      </div>
+    <!--   <div class="starter-template">
+      </div> -->
 
     </div><!-- /.container -->
 
@@ -94,6 +93,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/DeviceList.js"></script>
+        <script src="scripts/controllers/Configuration.js"></script>
         <script src="scripts/services/Device.js"></script>
         <!-- endbuild -->
 </body>

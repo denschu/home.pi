@@ -7,3 +7,7 @@ heroku
 .DS_Store
 *.sublime-project
 .env
+
+.DS_Store
+
+*.sublime-project

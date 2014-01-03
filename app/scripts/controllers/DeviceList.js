@@ -18,19 +18,19 @@ angular.module('homepiApp')
 	};
 
     $scope.turnAllDevicesOn = function () {
-		for (var i=0;i<$scope.devices.length;i++){ 
-		    var $id = $scope.devices[i].id;
-			var $state = 'on';
+    	for (var i=0;i<$scope.devices.length;i++){
+			var $id = $scope.devices[i].id;
+		 	var $state = 'on';
 			DeviceState.update({id:$id, state:$state});
 	    }
     };
 
     $scope.turnAllDevicesOff = function () {
-		for (var i=0;i<$scope.devices.length;i++){ 
-		    var $id = $scope.devices[i].id;
-			var $state = 'off';
+  		for (var i=0;i<$scope.devices.length;i++){
+			var $id = $scope.devices[i].id;
+	    	var $state = 'off';
 			DeviceState.update({id:$id, state:$state});
-	    }
-    };
+		}
+  	};
 
 });

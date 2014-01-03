@@ -21,6 +21,13 @@
       "topic": "home/devices/lampe_gruen/state/set"
     },
     {
+      "id": "weihnachtsbaum",
+      "name": "Weihnachtsbaum",
+      "type": "on_off",
+      "state": "off",
+      "topic": "home/devices/weihnachtsbaum/state/set"
+    },
+    {
       "id": "schrank_links",
       "name": "Schrank links",
       "type": "on_off",

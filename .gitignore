@@ -6,10 +6,7 @@ app/bower_components
 heroku
 .DS_Store
 *.sublime-project
+*.sublime-workspace
 .env
-
 .DS_Store
 
-*.sublime-project
-
-*.sublime-project

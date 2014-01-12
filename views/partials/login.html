@@ -1,0 +1,19 @@
+<div id="flash" class="alert-box alert" ng-show="flash">{{ flash }}</div>
+
+<div class="hero-unit">
+  <form ng-submit="login()">
+    <div class="control-group">
+      <label for="username" class="control-label" >Username:</label>
+      <div class="controls"><input id="username" type="text" ng-model="credentials.username"></div>
+    </div>
+    <div class="control-group">
+      <label for="password" class="control-label" >Password:</label>
+      <div class="controls"><input id="password" type="password" ng-model="credentials.password"></div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <input type="submit" class="btn" value="submit">
+      </div>
+    </div>
+  </form>
+</div>

@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="styles/50818aa0.main.css"/>
+        <!-- build:css({.tmp,app}) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
   </head>
   <body ng-app="homepiApp">
     <!--[if lt IE 7]>
@@ -40,6 +42,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#/configuration">Configuration</a></li>
+            <li><a href="#" ng-click="logout()">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -63,13 +66,37 @@
        ga('send', 'pageview');
     </script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
-        <script src="scripts/3233641e.plugins.js"></script>
+        <!-- build:js(app) scripts/plugins.js -->
+        <script src="bower_components/sass-bootstrap/js/affix.js"></script>
+        <script src="bower_components/sass-bootstrap/js/alert.js"></script>
+        <script src="bower_components/sass-bootstrap/js/button.js"></script>
+        <script src="bower_components/sass-bootstrap/js/carousel.js"></script>
+        <script src="bower_components/sass-bootstrap/js/transition.js"></script>
+        <script src="bower_components/sass-bootstrap/js/collapse.js"></script>
+        <script src="bower_components/sass-bootstrap/js/dropdown.js"></script>
+        <script src="bower_components/sass-bootstrap/js/modal.js"></script>
+        <script src="bower_components/sass-bootstrap/js/scrollspy.js"></script>
+        <script src="bower_components/sass-bootstrap/js/tab.js"></script>
+        <script src="bower_components/sass-bootstrap/js/tooltip.js"></script>
+        <script src="bower_components/sass-bootstrap/js/popover.js"></script>
+        <!-- endbuild -->
 
-        <script src="scripts/f8dc454d.modules.js"></script>
+        <!-- build:js(app) scripts/modules.js -->
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <!-- endbuild -->
 
-        <script src="scripts/d88dc777.scripts.js"></script>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/DeviceList.js"></script>
+        <script src="scripts/controllers/Configuration.js"></script>
+        <script src="scripts/controllers/Login.js"></script>
+        <script src="scripts/services/Device.js"></script>
+        <!-- endbuild -->
 </body>
 </html>

@@ -17,6 +17,16 @@ var mqttClient = mqtt.createClient(mqtt_url.port, mqtt_url.hostname, {
   password: auth[1]
 });
 
+mqttClient.on('connect', function() {
+  console.log("Subscribe to topics...: " + 'TODO');
+  mqttClient.subscribe(topics);
+  mqttClient.on('message', function(topic, message) {
+    topic = topic.replace(/"/g, "\\\"");
+    var message = message.replace(/"/g, "\\\"");   
+    //TODO
+  });
+});
+
 // GET
 exports.devices = function (req, res) {
   console.log('Getting devices: ' + configuration);
@@ -99,41 +109,3 @@ function changeDeviceState(id, state){
     }
   }
 }
-
-var configuration2 = [
-    {
-      "id": "stehlampe_wand",
-      "name": "Stehlampe Wand",
-      "type": "on_off",
-      "state": "off",
-      "topic": "home/devices/light1/state/set"
-    },
-    {
-      "id": "stehlampe_couch",
-      "name": "Stehlampe Couch",
-      "type": "on_off",
-      "state": "off",
-      "topic": "home/devices/light2/state/set"
-    },
-    {
-      "id": "lampe_gruen",
-      "name": "Lampe grün",
-      "type": "on_off",
-      "state": "off",
-      "topic": "home/devices/light3/state/set"
-    },
-    {
-      "id": "schrank_links",
-      "name": "Schrank links",
-      "type": "on_off",
-      "state": "off",
-      "topic": "home/devices/light4/state/set"
-    },
-    {
-      "id": "schrank_rechts",
-      "name": "Schrank rechts",
-      "type": "on_off",
-      "state": "off",
-      "topic": "home/devices/light5/state/set"
-    }
-  ];

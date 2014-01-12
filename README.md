@@ -1,6 +1,6 @@
 #TODOs
 
-* Support different control types in the gui: number, dimmer, switch, colour
+* Support different control types in the gui: number, dimmer, switch (subtypes: light_switch, tv_switch), colour
 * heroku config:add NODE_ENV=production
 * Sending retained messages
 

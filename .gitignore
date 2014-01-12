@@ -11,3 +11,5 @@ heroku
 .DS_Store
 
 *.sublime-project
+
+*.sublime-project

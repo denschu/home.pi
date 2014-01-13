@@ -18,12 +18,21 @@ var mqttClient = mqtt.createClient(mqtt_url.port, mqtt_url.hostname, {
 });
 
 mqttClient.on('connect', function() {
-  console.log("Subscribe to topics...: " + 'TODO');
-  mqttClient.subscribe(topics);
+  for (var i=0;i<configuration.length;i++){ 
+    var topic = configuration[i].topic;
+    console.log("Subscribe to topic: " + topic);
+    mqttClient.subscribe(topic);
+  }
   mqttClient.on('message', function(topic, message) {
     topic = topic.replace(/"/g, "\\\"");
     var message = message.replace(/"/g, "\\\"");   
-    //TODO
+    console.log("Incoming message: " + message + ' for topic ' + topic);
+    for (var i=0;i<configuration.length;i++){ 
+      if(configuration[i].topic == topic){
+        console.log('Change device state in GUI of device ' + configuration[i].id + ' to ' + message);
+        configuration[i].state=message;
+      }
+    }
   });
 });
 
@@ -61,9 +70,7 @@ exports.addDevice = function (req, res) {
 // PUT (idempotent changes)
 exports.editDevice = function (req, res) {
   var id = req.params.id;
-  console.log('id:' + id);
   if (id != null) {
-    console.log('req.body.state:' + req.body.state);
     changeDeviceState(id, req.body.state);
     res.send(200);
   } else {
@@ -103,7 +110,7 @@ function changeDeviceState(id, state){
     if(configuration[i].id == id){
       var device = configuration[i];
       console.log('Change status of device with id ' + id + " to " + state);
-      console.log('Publishing to Topic: '+ device.topic);
+      console.log('Publishing to Topic: '+ device.topic + '/set');
       mqttClient.publish(device.topic,state,{retain: true});
       device.state = state;
     }

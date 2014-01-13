@@ -4,42 +4,41 @@
       "name": "Temperatur Wohnzimmer",
       "type": "value",
       "state": "36",
-      "topic": "home/devices/temperatur_wohnzimmer/state/set",
-      "value_topic": "home/devices/temperatur_wohnzimmer/state"
+      "topic": "/home/devices/temperatur_wohnzimmer/state"
     },
    {
       "id": "stehlampe_wand",
       "name": "Stehlampe Wand",
       "type": "on_off",
       "state": "off",
-      "topic": "home/devices/stehlampe_wand/state/set"
+      "topic": "/home/devices/stehlampe_wand/state"
     },
     {
       "id": "stehlampe_couch",
       "name": "Stehlampe Couch",
       "type": "on_off",
       "state": "off",
-      "topic": "home/devices/stehlampe_couch/state/set"
+      "topic": "/home/devices/stehlampe_couch/state"
     },
     {
       "id": "lampe_gruen",
       "name": "Lampe grün",
       "type": "on_off",
       "state": "off",
-      "topic": "home/devices/lampe_gruen/state/set"
+      "topic": "/home/devices/lampe_gruen/state"
     },
     {
       "id": "schrank_links",
       "name": "Schrank links",
       "type": "on_off",
       "state": "off",
-      "topic": "home/devices/schrank_links/state/set"
+      "topic": "/home/devices/schrank_links/state"
     },
     {
       "id": "schrank_rechts",
       "name": "Schrank rechts",
       "type": "on_off",
       "state": "off",
-      "topic": "home/devices/schrank_rechts/state/set"
+      "topic": "/home/devices/schrank_rechts/state"
     }
   ]

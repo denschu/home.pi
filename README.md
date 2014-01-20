@@ -1,8 +1,3 @@
-#TODOs
-
-* Support different control types in the gui: number, dimmer, switch (subtypes: light_switch, tv_switch), colour
-
-
 # Home.Pi 
 
 *Simple Home Automation Solution with MQTT*
@@ -14,30 +9,23 @@
 * Completely independent from the used technology (most bindings are written in node.js)
 * Cloud-based architecture (only the bindings for the devices are running locally)
 
-
 ## System Architecture
 
-### Overview
-
-Take a look at my [puppet manifests](https://github.com/denschu/homepi-puppet) to setup Home.Pi on a Raspberry Pi very easily with puppet. You also get some help for the manual setup.
+![System Architecture](sys_arch_homepi.jpg)
 
 ### MQTT topics 
 
-#### Naming Conventions
+#### Recommended naming conventions
 
-	/home/devices/light1/state ON
-	/home/devices/light1/state/set ON
+Subscribe to a topic for getting the value of a device
 
-Example for setting a state of a switch 
+	/home/devices/<room>/<device-name>/state 
+	/home/devices/living_room/light1/state
 
-* Topic: /home/devices/<deviceName>/state/set
-* Payload: command (on, off)
+Publish to a topic for setting the value of a device
 
-Example for getting a state of a switch 
-
-* Topic: /home/devices/<deviceName>/state 
-* Payload: state (on, off)
-
+	/home/devices/<room>/<device-name>/state/set <value>
+	/home/devices/living_room/light1/state/set true
 
 ## Configuaration
 
@@ -62,8 +50,7 @@ Example:
 	brew install mosquitto
 	mosquitto
 
-
-### HomePi
+### Home.Pi
 
 	git clone https://github.com/denschu/homepi
 	npm install
@@ -72,10 +59,7 @@ Example:
 To monitor the configured topics simply subscribe to all topics
 
 	mosquitto_sub -t /#
-
-	mosquitto_pub -t /home/devices/temperatur_wohnzimmer/state -m on
 	
-
 ## Cloud Setup on Heroku
 
 First install the Heroku Toolbelt (https://toolbelt.heroku.com/) and Signup for an account
@@ -93,13 +77,11 @@ Then execute the following commands from the root of the project
 	heroku open
 	heroku logs
 
-See also https://devcenter.heroku.com/articles/cloudmqtt for detailed information to setup an MQTT Broker
-
-HomePi will publish to the corresponding topics like the following mosquitto_pub-command
-
-	mosquitto_pub -d -t /home/devices/light1/state/set -m "on"
+See also https://devcenter.heroku.com/articles/cloudmqtt for detailed information to setup an MQTT Broker.
 
 ## Available MQTT Bindings (separate git-Repositories)
+
+Take a look at my [puppet manifests](https://github.com/denschu/homepi-puppet) to setup the Raspberry Pi very easily with puppet. You also get some help for the manual setup.
 
 * [mqtt-exec](https://github.com/denschu/mqtt-exec) (Execute shell commands like "sudo shutdown -h now")
 * [mqtt-zway](https://github.com/denschu/mqtt-zway)
@@ -122,7 +104,8 @@ HomePi will publish to the corresponding topics like the following mosquitto_pub
 
 ## Planned Features
 
-* Show/Edit configuration of a device
+* Support different control types in the GUI: number, dimmer, switch (subtypes: light_switch, tv_switch), colour
+* Edit configuration of a device in the GUI
 * Integration with [Node-RED](http://nodered.org/)
 * Easier deployment on local device
 * More bindings
@@ -130,6 +113,8 @@ HomePi will publish to the corresponding topics like the following mosquitto_pub
 	* GPIO-PIN (RPi) 
 	* IFTT 
 	* REST
+* Persistence with Firebase
+* Websockets-to-MQTT-Bridge (any free cloud-based Services available?)
 * ... make a feature request! ... or just a pull request!
 
-For further informations and setup instructions please refer to my [blog post](http://blog.codecentric.de/en/2013/03/home-automation-with-angularjs-and-node-js-on-a-raspberry-pi).
+For further informations and setup instructions please refer to my [blog posts](http://blog.codecentric.de/en/). 

@@ -3,12 +3,15 @@
 var mqtt = require('mqtt');
 var fs = require('fs');
 var url = require('url');
+var Fiber = require('fibers');
 
 var configuration = JSON.parse(fs.readFileSync(__dirname+'/config.json').toString());
 
 // Parse
-var mqtt_url = url.parse(process.env.CLOUDMQTT_URL || 'mqtt://localhost:1883');
+var mqtt_url = url.parse(process.env.MQTT_BROKER_URL || 'mqtt://localhost:1883');
 var auth = (mqtt_url.auth || ':').split(':');
+
+var bufferedRequests = {};
 
 //Creating the MQTT Client
 console.log("Creating client for: " + mqtt_url.hostname);
@@ -29,8 +32,16 @@ mqttClient.on('connect', function() {
     console.log("Incoming message: " + message + ' for topic ' + topic);
     for (var i=0;i<configuration.length;i++){ 
       if(configuration[i].topic == topic){
-        console.log('Change device state in GUI of device ' + configuration[i].id + ' to ' + message);
-        configuration[i].state=message;
+        console.log('Change device value in GUI of device ' + configuration[i].id + ' to ' + message);
+        var isTrueSet = (message === 'true');
+        var isFalseSet = (message === 'false');
+        if(isTrueSet){
+          configuration[i].value=isTrueSet;
+        }else if(isFalseSet){
+          configuration[i].value=isFalseSet;
+        }else{
+          configuration[i].value=message;
+        }
       }
     }
   });
@@ -38,7 +49,7 @@ mqttClient.on('connect', function() {
 
 // GET
 exports.devices = function (req, res) {
-  console.log('Getting devices: ' + configuration);
+  console.log('Getting devices: ' + JSON.stringify(configuration));
   res.json(configuration);
 };
 
@@ -59,60 +70,46 @@ exports.device = function (req, res) {
   }
 };
 
-// POST
-exports.addDevice = function (req, res) {
-  var newdevice = req.body;
-  console.log('Adding device: ' + JSON.stringify(newdevice));
-  configuration.push(newdevice);
-  res.send(201);
-};
-
 // PUT (idempotent changes)
 exports.editDevice = function (req, res) {
   var id = req.params.id;
   if (id != null) {
-    changeDeviceState(id, req.body.state);
+    changeDeviceState(id, req.body.value);
     res.send(200);
   } else {
     res.json(404);
   }
 };
 
-// PUT
-exports.editAllDevices = function (req, res) {
-  console.log('Change status of all devices to ' + req.body.status);
-  for (var i=0;i<configuration.length;i++){ 
-    var id = configuration[i].id;
-    changeDeviceState(id, req.body.state);
-  }
-  res.send(200);
-};
-
-// DELETE
-exports.deleteDevice= function (req, res) {
-  var id = req.params.id;
-  if (id != null) {
-    for (var i=0;i<configuration.length;i++){ 
-      if(configuration[i].id == id){
-        var device = configuration[i];
-        console.log('Delete device with id: ' + id);
-        configuration.splice(id, 1);
-      }
-    }
-    res.send(200);
-  } else {
-    res.json(404);
-  }
-};
-
-function changeDeviceState(id, state){
+function changeDeviceState(id, value){
   for (var i=0;i<configuration.length;i++){ 
     if(configuration[i].id == id){
       var device = configuration[i];
-      console.log('Change status of device with id ' + id + " to " + state);
-      console.log('Publishing to Topic: '+ device.topic + '/set');
-      mqttClient.publish(device.topic,state,{retain: true});
-      device.state = state;
+      console.log('Change status of device with id ' + id + " to " + value);
+      publishAsync(device.topic+ '/set',value.toString());
+      configuration[i].value = value;
     }
   }
+}
+
+function publishAsync(topic,payload) {
+  bufferedRequests[topic] = payload;
+  Fiber(function() {
+      console.log('enqueue Message for topic: ' + topic + ' with payload: ' + payload);
+      sleep(2000);
+      if(bufferedRequests[topic] !=null){
+        console.log('Publishing to topic: '+ topic + ' with payload: ' + bufferedRequests[topic]);
+        mqttClient.publish(topic,bufferedRequests[topic],{retain: true});
+        bufferedRequests[topic] = null;
+      }
+  }).run();
+  console.log('back in main');
+}
+
+function sleep(ms) {
+    var fiber = Fiber.current;
+    setTimeout(function() {
+        fiber.run();
+    }, ms);
+    Fiber.yield();
 }

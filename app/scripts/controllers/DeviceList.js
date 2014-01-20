@@ -1,36 +1,31 @@
 'use strict';
 
-angular.module('homepiApp')
-  .controller('DeviceListCtrl', function ($scope, Device, DeviceState) {
+angular.module('homepi.controllers', [])
 
-	$scope.devices = Device.query();
+.controller('AppCtrl', function($scope) {
+  // Main app controller, empty for the example
+})
 
-	$scope.turnDeviceOn = function (id) {
-		var $id = id;
-		var $state = 'on';
-		DeviceState.update({id:$id, state:$state});
-	};
+.controller('DeviceListCtrl', function($scope, Device, DeviceState) {
 
-	$scope.turnDeviceOff = function (id) {
-		var  $id = id;
-		var $state = 'off';
-		DeviceState.update({id:$id, state:$state});
-	};
+  $scope.devices = Device.query();  
 
-    $scope.turnAllDevicesOn = function () {
-    	for (var i=0;i<$scope.devices.length;i++){
-			var $id = $scope.devices[i].id;
-		 	var $state = 'on';
-			DeviceState.update({id:$id, state:$state});
-	    }
-    };
+  $scope.$on('tab.shown', function() {
+    // Might do a load here
+  });
+  $scope.$on('tab.hidden', function() {
+    // Might recycle content here
+  });
 
-    $scope.turnAllDevicesOff = function () {
-  		for (var i=0;i<$scope.devices.length;i++){
-			var $id = $scope.devices[i].id;
-	    	var $state = 'off';
-			DeviceState.update({id:$id, state:$state});
-		}
-  	};
+  $scope.change = function (device) {
+    console.log('changed: ' + device.id + ' value: ' + device.value);
+    var $id = device.id;
+    var $value = device.value;
+    DeviceState.update({id:$id, value:$value});
+  };
 
+})
+
+.controller('DeviceCtrl', function($scope, $routeParams, Device) {
+  $scope.device = Device.get($routeParams.deviceId);
 });

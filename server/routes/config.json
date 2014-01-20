@@ -1,44 +1,51 @@
 [
    {
-      "id": "temperatur_wohnzimmer",
-      "name": "Temperatur Wohnzimmer",
-      "type": "value",
-      "state": "36",
-      "topic": "/home/devices/temperatur_wohnzimmer/state"
-    },
-   {
       "id": "stehlampe_wand",
       "name": "Stehlampe Wand",
       "type": "on_off",
-      "state": "off",
-      "topic": "/home/devices/stehlampe_wand/state"
+      "value": false,
+      "topic": "/home/devices/wohnzimmer/stehlampe_wand/value"
     },
     {
       "id": "stehlampe_couch",
       "name": "Stehlampe Couch",
-      "type": "on_off",
-      "state": "off",
-      "topic": "/home/devices/stehlampe_couch/state"
+      "type": "dimmer",
+      "value": 100,
+      "topic": "/home/devices/wohnzimmer/stehlampe_couch/value"
     },
     {
       "id": "lampe_gruen",
       "name": "Lampe grün",
       "type": "on_off",
-      "state": "off",
-      "topic": "/home/devices/lampe_gruen/state"
+      "value": false,
+      "topic": "/home/devices/wohnzimmer/lampe_gruen/value"
     },
     {
       "id": "schrank_links",
       "name": "Schrank links",
       "type": "on_off",
-      "state": "off",
-      "topic": "/home/devices/schrank_links/state"
+      "value": false,
+      "topic": "/home/devices/wohnzimmer/schrank_links/value"
     },
     {
       "id": "schrank_rechts",
       "name": "Schrank rechts",
       "type": "on_off",
-      "state": "off",
-      "topic": "/home/devices/schrank_rechts/state"
+      "value": false,
+      "topic": "/home/devices/wohnzimmer/schrank_rechts/value"
+    },
+    {
+      "id": "thermostat_wohnzimmer",
+      "name": "Wohnzimmer",
+      "type": "thermostat",
+      "value": 16,
+      "topic": "/home/devices/wohnzimmer/thermostat/value"
+    },
+    {
+      "id": "thermostat_badezimmer",
+      "name": "Badezimmer",
+      "type": "thermostat",
+      "value": 16,
+      "topic": "/home/devices/badezimmer/thermostat/value"
     }
-  ]
+]

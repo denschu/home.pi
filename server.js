@@ -6,10 +6,6 @@ var path = require('path');
 
 var app = express();
 
-//Passport Stuff
-var passport = require('passport');
-var Authentication = require('./server/authentication');
-
 // Express Configuration
 app.configure('development', function(){
   app.use(require('connect-livereload')());
@@ -32,22 +28,6 @@ app.configure(function(){
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 
-  //Passport
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'i am not telling you' }));
-  // Add csrf support
-  app.use(express.csrf({value: Authentication.csrf}));
-  app.use(function(req, res, next) {
-     res.cookie('XSRF-TOKEN', req.session._csrf);
-     next();
-  });
-  // setup passport authentication
-  app.use(passport.initialize());
-  app.use(passport.session());
-  passport.use(Authentication.localStrategy);
-  passport.serializeUser(Authentication.serializeUser);
-  passport.deserializeUser(Authentication.deserializeUser);
-
   // Router needs to be last
 	app.use(app.router);
 });
@@ -57,19 +37,10 @@ var api = require('./server/routes/api'),
     routes = require('./server/routes');
 
 // Server Routes
-app.get('/api/devices', Authentication.ensureAuthenticated, api.devices);
-app.get('/api/devices/:id', Authentication.ensureAuthenticated, api.device);
-//app.post('/api/devices', api.addDevice);
-app.put('/api/devices/:id/state', Authentication.ensureAuthenticated, api.editDevice);
-//app.put('/api/devices', api.editAllDevices);
-//app.del('/api/devices/:id', api.deleteDevice);
+app.get('/api/devices', api.devices);
+app.get('/api/devices/:id', api.device);
+app.put('/api/devices/:id/value', api.editDevice);
 
-//Passport
-app.post('/login', Authentication.login);
-app.get('/logout', Authentication.logout);
-app.get('/user', Authentication.ensureAuthenticated, function(req, res, next) {
-  return res.json(req.session.user);
-})
 
 // Angular Routes
 app.get('/partials/*', routes.partials);

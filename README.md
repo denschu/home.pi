@@ -85,9 +85,11 @@ Then execute the following commands from the root of the project
 	grunt heroku
 	cd heroku
 	heroku create
+	git add -A
+	git commit -m 'deploy' -a
 	git push heroku master
 	heroku config:add NODE_ENV=production
-	heroku addons:add cloudmqtt
+	heroku config:add MQTT_BROKER_URL=<insert_url_mqtt_broker_here>
 	heroku open
 	heroku logs
 

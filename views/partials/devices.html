@@ -1,24 +1,70 @@
-<div class="container">
-  <table class="table table-hover">
-    <tbody>
-      <tr>
-        <td>
-          <h2>All</h2>
-          <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-success" ng-click="turnAllDevicesOn()">On</button>
-              <button type="button" class="btn btn-danger" ng-click="turnAllDevicesOff()">Off</button>
-           </div>
-        </td>
-      </tr>
-      <tr ng-repeat="device in devices">
-        <td>
-          <h2>{{device.name}}</h2>
-          <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-success" ng-click="turnDeviceOn(device.id)">On</button>
-              <button type="button" class="btn btn-danger" ng-click="turnDeviceOff(device.id)">Off</button>
-           </div>
-        </td>
-      </tr>
-    </tbody>
-   </table> 
-</div>
+<nav-page id="app-page">
+
+  <!--
+  Create tabs with an icon and text label, using the tabs-positive style (blue by default),
+  and disabling header title animation when switching tabs.
+  -->
+  <tabs tabs-style="tabs-icon-top" tabs-type="tabs-dark" animate-nav="false">
+
+    <tab title="Home.Pi" icon="icon ion-home" ng-controller="DeviceListCtrl">
+
+      <content has-header="true" has-tabs="true">
+      
+        <ul class="list">
+          <li class="item item-toggle item-icon-left" ng-repeat="device in devices | filter:'on_off'">
+             <i class="icon ion-ios7-lightbulb-outline"></i>
+             {{ device.name }}
+             <label class="toggle">
+               <input type="checkbox" ng-model="device.value" ng-change="change(device)">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        </ul>
+
+        <div class="item range range-energized" ng-repeat="device in devices | filter:'dimmer'">
+            {{ device.name }}
+            <i class="icon ion-ios7-lightbulb-outline"></i>
+            <input type="range" name="volume" min="0" max="100" ng-model="device.value" ng-change="change(device)">
+            <i class="icon ion-ios7-lightbulb"></i>
+            {{ device.value }} 
+        </div>
+
+        <div class="item range range-assertive" ng-repeat="device in devices | filter:'thermostat'">
+            {{ device.name }}
+            <i class="icon ion-ios7-sunny"></i>
+            <input type="range" name="volume" min="15" max="25" ng-model="device.value" ng-change="change(device)">
+            <i class="icon ion-ios7-sunny-outline"></i>
+            {{ device.value }} 
+        </div>
+
+      </content>
+
+    </tab>
+
+    <!-- Configuration tab -->
+    <tab title="Configuration" icon="icon ion-heart">
+      <content has-header="true" has-tabs="true">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <span class="input-label">MQTT Broker</span>
+            <input type="text">
+          </label>
+          <button class="button button-dark button-block">Save</button>
+        </div>
+      </content>
+    </tab>
+
+    <!-- About tab -->
+    <tab title="About" icon="icon ion-search">
+      <content has-header="true" has-tabs="true" padding="true">
+        <h3>About this app</h3>
+        <p>
+          This is a sample seed project for the Ionic Framework. Please change it to match your needs.
+        </p>
+      </content>
+    </tab>
+
+  </tabs>
+</nav-page>

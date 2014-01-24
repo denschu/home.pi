@@ -9,4 +9,5 @@ heroku
 *.sublime-workspace
 .env
 .DS_Store
+views
 

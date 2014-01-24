@@ -83,10 +83,14 @@ See also https://devcenter.heroku.com/articles/cloudmqtt for detailed informatio
 
 Take a look at my [puppet manifests](https://github.com/denschu/homepi-puppet) to setup the Raspberry Pi very easily with puppet. You also get some help for the manual setup.
 
-* [mqtt-exec](https://github.com/denschu/mqtt-exec) (Execute shell commands like "sudo shutdown -h now")
-* [mqtt-zway](https://github.com/denschu/mqtt-zway)
-* [mqtt-temperature](https://github.com/denschu/mqtt-temperature)
-* [mqtt-lirc](https://github.com/denschu/mqtt-lirc)
+At the moment the following "experimental" MQTT bindings are available:
+
+* [mqtt-exec](https://npmjs.org/package/mqtt-exec) Execute shell commands like "sudo shutdown -h now"
+* [mqtt-zway](https://npmjs.org/package/mqtt-zway) Connect to the Z-Wave RaZBerry Server Z-Way
+* [mqtt-google-calendar](https://npmjs.org/package/mqtt-google-calendar) Use Google Calendar as a scheduling engine
+* [mqtt-rules](https://github.com/denschu/mqtt-rules) Create rules and execute them on incoming MQTT messages
+* [mqtt-temperature](https://github.com/denschu/mqtt-temperature) Log temperature to MQTT
+* [mqtt-lirc](https://github.com/denschu/mqtt-lirc) Control infrared devices
 
 
 ## Technologies/Frameworks

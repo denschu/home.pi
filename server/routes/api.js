@@ -87,7 +87,7 @@ function changeDeviceState(id, value){
       var device = configuration[i];
       console.log('Change status of device with id ' + id + " to " + value);
       publishAsync(device.topic+ '/set',value.toString());
-      configuration[i].value = value;
+      //configuration[i].value = value;
     }
   }
 }

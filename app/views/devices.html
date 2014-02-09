@@ -1,0 +1,39 @@
+<!-- 
+  This template gets placed in the Pet tab's <nav-view> directive.
+  It was wired up in the app config (app.js) 
+  The 'pets' data comes from its $scope within PetIndexCtrl (controller.js)
+-->
+<view title="'Devices'">
+  <content has-header="true" has-tabs="true">
+
+    <ul class="list">
+      <li class="item item-toggle item-icon-left" ng-repeat="device in devices | orderByPriority | filter:'on_off'">
+         <i class="icon ion-ios7-lightbulb-outline"></i>
+         {{ device.name }}
+         <label class="toggle">
+           <input type="checkbox" ng-model="device.value" ng-change="change(device)">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+      </li>
+    <ul>
+    
+    <div class="item range range-energized" ng-repeat="device in devices | orderByPriority | filter:'dimmer'">
+        {{ device.name }}
+        <i class="icon ion-ios7-lightbulb-outline"></i>
+        <input type="range" name="volume" min="0" max="100" ng-model="device.value" ng-change="change(device)">
+        <i class="icon ion-ios7-lightbulb"></i>
+        {{ device.value }} 
+    </div>
+
+    <div class="item range range-assertive" ng-repeat="device in devices | orderByPriority | filter:'thermostat'">
+        {{ device.name }}
+        <i class="icon ion-ios7-sunny"></i>
+        <input type="range" name="volume" min="15" max="25" ng-model="device.value" ng-change="change(device)">
+        <i class="icon ion-ios7-sunny-outline"></i>
+        {{ device.value }} 
+    </div>
+
+  </content>
+</view>

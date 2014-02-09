@@ -2,10 +2,12 @@
   "name": "homepi",
   "version": "3.0.0",
   "dependencies": {
-    "ionic": "0.9.17-alpha"
+    "ionic": "0.9.21-alpha",
+    "paho": "git://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.javascript.git",
+    "angularfire": "0.6.0"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.0",
-    "angular-scenario": "~1.2.0"
+    "angular-mocks": "~1.2.6",
+    "angular-scenario": "~1.2.6"
   }
 }

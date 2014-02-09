@@ -1,23 +1,48 @@
-'use strict';
+// Ionic Starter App, v0.9.20
 
-angular.module('homepi', ['ionic', 'ngRoute', 'ngAnimate', 'ngResource', 'homepi.services', 'homepi.controllers'])
-.config(function ($compileProvider){
-  // Needed for routing to work
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'starter.services' is found in services.js
+// 'starter.controllers' is found in controllers.js
+angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','homepi.config'])
 
-.config(function($routeProvider, $locationProvider) {
-  $routeProvider.when('/', {
-    templateUrl: 'partials/devices.html',
-    controller: 'AppCtrl'
-  });
-  $routeProvider.when('/devices/:deviceId', {
-    templateUrl: 'partials/device.html',
-    controller: 'DeviceCtrl'
-  });
-  $routeProvider.otherwise({
-    redirectTo: '/'
-  });
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+    // setup an abstract state for the tabs directive
+    .state('tab', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "views/tabs.html"
+    })
+    // the pet tab has its own child nav-view and history
+    .state('tab.devices', {
+      url: '/devices',
+      views: {
+        'devices-tab': {
+          templateUrl: 'views/devices.html',
+          controller: 'DeviceListCtrl'
+        }
+      }
+    })
+    .state('tab.about', {
+      url: '/about',
+      views: {
+        'about-tab': {
+          templateUrl: 'views/about.html'
+        }
+      }
+    });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/tab/devices');
 
 });
+
 

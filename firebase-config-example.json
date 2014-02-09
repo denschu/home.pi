@@ -1,0 +1,39 @@
+{
+  "devices" : [ {
+    "type" : "on_off",
+    "value" : false,
+    "name" : "Ceiling Light",
+    "topic" : "/home/devices/livingroom/ceiling_light/value",
+    "id" : "ceiling_light"
+  }, {
+    "type" : "dimmer",
+    "value" : 0,
+    "name" : "Floor Lamp",
+    "topic" : "/home/devices/livingroom/floor_lamp/value",
+    "id" : "floor_lamp"
+  }, null, {
+    "type" : "on_off",
+    "value" : false,
+    "name" : "Cabinet Light",
+    "topic" : "/home/devices/livingroom/cabinet_light/value",
+    "id" : "cabinet_light"
+  }, null, {
+    "type" : "thermostat",
+    "value" : 16,
+    "name" : "Livingroom",
+    "topic" : "/home/devices/livingroom/thermostat/value",
+    "id" : "thermostat_livingroom"
+  }, {
+    "type" : "thermostat",
+    "value" : 16,
+    "name" : "Bathroom",
+    "topic" : "/home/devices/bathroom/thermostat/value",
+    "id" : "thermostat_bathroom"
+  } ],
+  "mqttbroker" : {
+    "username" : "",
+    "host" : "broker.mqttdashboard.com",
+    "password" : "",
+    "port" : 8000
+  }
+}

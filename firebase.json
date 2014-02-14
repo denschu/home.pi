@@ -1,0 +1,5 @@
+{
+  "firebase": "homepi",
+  "public": "app",
+  "rules": "security-rules.json"
+}

@@ -2,6 +2,8 @@
 
 * Simple Home Automation Solution with MQTT*
 
+[Demo Application](https://homepi.firebaseapp.com/)
+
 ## Features
 
 * Home Automation with MQTT
@@ -14,8 +16,13 @@
 
 ## Installation
 
-* Install a MQTT Broker with Websocket Support, e.g. HiveMQ
+* Install a MQTT Broker with Websocket Support, e.g. 
+	* [HiveMQ](http://www.hivemq.com/)
+	* [Mosquitto](http://mosquitto.org/) with [https://github.com/stylpen/WSS]
+	* [Mosca](http://www.mosca.io/)
+
 * Create a Firebase Account
+
 * Place you device configuration in a configuration file e.g. "firebase-config.json" and upload it to your firebase account. See also the example "firebase-config-example.json" for further details.
 
 Example:
@@ -39,6 +46,9 @@ Example:
 * Build and Run
 
 	grunt serve
+
+* To place your static files on a public webserver, you can use [Firebase Hosting](https://www.firebase.com/docs/hosting.html) 
+	
 	
 ## MQTT topic conventions
 

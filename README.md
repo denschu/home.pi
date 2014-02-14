@@ -1,6 +1,6 @@
 # Home.Pi 
 
-* Simple Home Automation Solution with MQTT*
+* Simple Home Automation Solution with MQTT
 
 [Demo Application](https://homepi.firebaseapp.com/)
 
@@ -21,6 +21,13 @@
 	* [Mosquitto](http://mosquitto.org/) with [https://github.com/stylpen/WSS]
 	* [Mosca](http://www.mosca.io/)
 
+* Clone the repository and install the dependencies
+
+	git clone https://github.com/denschu/homepi
+	npm install
+
+* Open app/js/config.js and add your Firebase URL
+
 * Create a Firebase Account
 
 * Place you device configuration in a configuration file e.g. "firebase-config.json" and upload it to your firebase account. See also the example "firebase-config-example.json" for further details.
@@ -34,14 +41,6 @@ Example:
 	    "topic" : "/home/devices/livingroom/ceiling_light/value",
 	    "id" : "ceiling_light"
   	}
-
-* Clone the repository and install the dependencies
-
-	git clone https://github.com/denschu/homepi
-	npm install
-
-* Open app/js/config.js and add your Firebase URL
-
 
 * Build and Run
 

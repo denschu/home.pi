@@ -33,9 +33,6 @@ angular.module('homepi.services', ['firebase','homepi.config'])
     }
  
     service.publish = function(topic, payload) {
-        if(payload == true || payload == false){
-            payload = JSON.stringify(payload);
-        }
         var message = new Messaging.Message(payload);
         console.log('publish-Event sent '+ payload + ' with topic: ' + topic);
         message.destinationName = topic;

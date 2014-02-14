@@ -17,7 +17,11 @@ angular.module('homepi.controllers', ['firebase','homepi.config'])
 
   $scope.change = function (device) {
     console.log('changed: ' + device.id + ' value: ' + device.value);
-    Socket.publish(device.topic + '/set',device.value);
+    var payload = device.value;
+    if(device.type == 'on_off' && (device.value == true || device.value == false)){
+        payload = JSON.stringify(device.value);
+    }
+    Socket.publish(device.topic + '/set',payload);
   };
 
   Socket.onMessage(function(topic, payload) {

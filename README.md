@@ -1,5 +1,7 @@
 # Home.Pi 
 
+[![Build Status](https://travis-ci.org/denschu/home.pi.png)](https://travis-ci.org/denschu/home.pi)
+
 * Simple Home Automation Solution with MQTT
 
 [Demo Application](https://homepi.firebaseapp.com/)

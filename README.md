@@ -48,8 +48,9 @@ Example:
 
 	grunt serve
 
-* To place your static files on a public webserver, you can use [Firebase Hosting](https://www.firebase.com/docs/hosting.html) 
-	
+or run it with Docker without installation
+
+	docker run -d -e BACKEND_URL=homepi -p 80:80 denschu/homepi
 	
 ## MQTT topic conventions
 

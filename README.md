@@ -1,4 +1,4 @@
-# Home.Pi 
+# Home.Pi
 
 [![Build Status](https://travis-ci.org/denschu/home.pi.png)](https://travis-ci.org/denschu/home.pi)
 
@@ -18,7 +18,7 @@
 
 ## Installation
 
-* Install a MQTT Broker with Websocket Support, e.g. 
+* Install a MQTT Broker with Websocket Support, e.g.
 	* [HiveMQ](http://www.hivemq.com/)
 	* [Mosquitto](http://mosquitto.org/) with [https://github.com/stylpen/WSS]
 	* [Mosca](http://www.mosca.io/)
@@ -51,12 +51,12 @@ Example:
 or run it with Docker without installation
 
 	docker run -d -e BACKEND_URL=homepi -p 80:80 denschu/homepi
-	
+
 ## MQTT topic conventions
 
 Subscribe to a topic for getting the value of a device
 
-	/home/devices/<room>/<device-name>/state 
+	/home/devices/<room>/<device-name>/state
 	/home/devices/living_room/light1/state
 
 Publish to a topic for setting the value of a device
@@ -84,4 +84,4 @@ At the moment the following "experimental" MQTT bindings are available:
 * MQTT
 * Ionic Framework (with AngularJS)
 
-For further informations and setup instructions please refer to my [blog posts](http://blog.codecentric.de/en/). 
+For further informations and setup instructions please refer to my [blog posts](http://blog.codecentric.de/en/).

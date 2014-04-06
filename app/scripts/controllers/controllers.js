@@ -1,25 +1,26 @@
 'use strict';
 
-angular.module('homepi.controllers', ['firebase','homepi.config'])
-.controller('DeviceListCtrl', function($scope, $firebase, Socket, environment) {
+angular.module('homepi.controllers', ['homepi.config'])
 
-  $scope.$on('tab.shown', function() {
-    var devices = new Firebase(environment.firebase_url + '/devices');
-    devices.on('value', function(response) {
-      $scope.devices = response.val();
-      $scope.$apply();
-      Socket.connect(response.val());
-    });
-  });
-  $scope.$on('tab.hidden', function() {
-    // Might recycle content here
-  });
+.controller('AppCtrl', function($scope) {
+  // Main app controller, empty for the example
+})
+
+.controller('DeviceListCtrl', function($scope, Socket, Device, environment) {
+
+  $scope.devices = Device.query();
+
+  var init = function () {
+      console.log('init: ');
+      Socket.connect($scope.devices);
+  };
+  init();
 
   $scope.change = function (device) {
     console.log('changed: ' + device.id + ' value: ' + device.value);
     var payload = device.value;
     if(device.type == 'on_off' && (device.value == true || device.value == false)){
-        payload = JSON.stringify(device.value);
+        payload = JSON.stringify(!device.value);
     }
     Socket.publish(device.topic + '/set',payload);
   };
@@ -38,7 +39,7 @@ angular.module('homepi.controllers', ['firebase','homepi.config'])
           }else{
             device.value = payload;
           }
-        } 
+        }
     });
     $scope.$apply();
   });

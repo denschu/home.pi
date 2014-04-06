@@ -1,6 +1,6 @@
-angular.module('homepi.services', ['firebase','homepi.config'])
+angular.module('homepi.services', ['homepi.config','ngResource','firebase'])
 
-.factory('Socket', function($rootScope, $firebase, environment) {
+.factory('Socket', function($firebase, environment) {
 
     var service = {};
 
@@ -31,7 +31,7 @@ angular.module('homepi.services', ['firebase','homepi.config'])
         });
 
     }
- 
+
     service.publish = function(topic, payload) {
         var message = new Messaging.Message(payload);
         console.log('publish-Event sent '+ payload + ' with topic: ' + topic);
@@ -44,6 +44,12 @@ angular.module('homepi.services', ['firebase','homepi.config'])
     service.onMessage = function(callback) {
         service.callback = callback;
     }
-    
+
     return service;
+})
+.factory('Device', function ($resource, environment) {
+    return $resource(environment.firebase_url + '/devices.json', {}, {
+        query: { method: 'GET', isArray: true },
+        create: { method: 'POST' }
+    })
 });

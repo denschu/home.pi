@@ -15,34 +15,21 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','home
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+
     // setup an abstract state for the tabs directive
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "views/tabs.html"
+    .state('splash', {
+      url: "/",
+      templateUrl: "templates/splash.html"
     })
+
     // the pet tab has its own child nav-view and history
-    .state('tab.devices', {
+    .state('devices', {
       url: '/devices',
-      views: {
-        'devices-tab': {
-          templateUrl: 'views/devices.html',
-          controller: 'DeviceListCtrl'
-        }
-      }
-    })
-    .state('tab.about', {
-      url: '/about',
-      views: {
-        'about-tab': {
-          templateUrl: 'views/about.html'
-        }
-      }
+      templateUrl: 'templates/devices.html',
+      controller: 'DeviceListCtrl'
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/devices');
+  $urlRouterProvider.otherwise('/devices');
 
 });
-
-

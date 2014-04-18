@@ -1,6 +1,6 @@
 <ion-view title="Home.Pi">
 
-    <ion-header-bar class="bar-positive">
+    <ion-header-bar class="bar-dark">
     </ion-header-bar>
 
     <ion-content>
@@ -18,8 +18,9 @@
         <div class="item range range-energized" ng-repeat="device in devices | orderByPriority | filter:'dimmer'">
             <i class="icon ion-ios7-lightbulb-outline"></i>
             {{ device.name }}
-            <input type="range" name="volume" min="0" max="100" ng-model="device.value" ng-change="change(device)">
+            <input type="range" name="volume" min="0" step="10" max="100" ng-model="device.value" ng-change="change(device)">
             <i class="icon ion-ios7-lightbulb"></i>
+            {{ device.value }} 
         </div>
 
         <div class="item range range-assertive" ng-repeat="device in devices | orderByPriority | filter:'thermostat'">

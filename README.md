@@ -46,11 +46,25 @@ Example:
 
 * Build and Run
 
-	grunt serve
+	cd www
+	python -m SimpleHTTPServer 8080
 
 or run it with Docker without installation
 
-	docker run -d -e BACKEND_URL=homepi -p 80:80 denschu/homepi
+	docker build -t denschu/homepi .
+
+	sudo docker run -d -e BACKEND_URL=homepi -p 80:80 denschu/homepi
+
+	sudo boot2docker ssh -L 80:localhost:80 (Password: tcuser)
+
+	docker push denschu/homepi
+
+or build it as native app
+
+	sudo npm install -g cordova ionic
+	ionic platform add ios
+	ionic build ios
+	ionic emulate ios
 
 ## MQTT topic conventions
 

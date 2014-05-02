@@ -1,39 +1,82 @@
 {
-  "devices" : [ {
-    "type" : "on_off",
-    "value" : false,
-    "name" : "Ceiling Light",
-    "topic" : "/home/devices/livingroom/ceiling_light/value",
-    "id" : "ceiling_light"
-  }, {
-    "type" : "dimmer",
-    "value" : 0,
-    "name" : "Floor Lamp",
-    "topic" : "/home/devices/livingroom/floor_lamp/value",
-    "id" : "floor_lamp"
-  }, null, {
-    "type" : "on_off",
-    "value" : false,
-    "name" : "Cabinet Light",
-    "topic" : "/home/devices/livingroom/cabinet_light/value",
-    "id" : "cabinet_light"
-  }, null, {
-    "type" : "thermostat",
-    "value" : 16,
-    "name" : "Livingroom",
-    "topic" : "/home/devices/livingroom/thermostat/value",
-    "id" : "thermostat_livingroom"
-  }, {
-    "type" : "thermostat",
-    "value" : 16,
-    "name" : "Bathroom",
-    "topic" : "/home/devices/bathroom/thermostat/value",
-    "id" : "thermostat_bathroom"
-  } ],
-  "mqttbroker" : {
-    "username" : "",
-    "host" : "broker.mqttdashboard.com",
-    "password" : "",
-    "port" : 8000
+  "users" : {
+    "1" : {
+      "devices" : [ {
+        "type" : "on_off",
+        "value" : false,
+        "name" : "Stehlampe Wand",
+        "topic" : "/home/devices/wohnzimmer/stehlampe_wand/value",
+        "id" : "stehlampe_wand"
+      }, {
+        "type" : "dimmer",
+        "value" : 0,
+        "name" : "Stehlampe Couch",
+        "topic" : "/home/devices/wohnzimmer/stehlampe_couch/value",
+        "id" : "stehlampe_couch"
+      }, {
+        "type" : "on_off",
+        "value" : false,
+        "name" : "Lampe grün",
+        "topic" : "/home/devices/wohnzimmer/lampe_gruen/value",
+        "id" : "lampe_gruen"
+      }, {
+        "type" : "on_off",
+        "value" : false,
+        "name" : "Schrank links",
+        "topic" : "/home/devices/wohnzimmer/schrank_links/value",
+        "id" : "schrank_links"
+      }, {
+        "type" : "on_off",
+        "value" : false,
+        "name" : "Schrank rechts",
+        "topic" : "/home/devices/wohnzimmer/schrank_rechts/value",
+        "id" : "schrank_rechts"
+      }, {
+        "type" : "thermostat",
+        "value" : 16,
+        "name" : "Wohnzimmer",
+        "topic" : "/home/devices/wohnzimmer/thermostat/value",
+        "id" : "thermostat_wohnzimmer"
+      }, {
+        "type" : "thermostat",
+        "value" : 16,
+        "name" : "Badezimmer",
+        "topic" : "/home/devices/badezimmer/thermostat/value",
+        "id" : "thermostat_badezimmer"
+      }, {
+        "type" : "on:off",
+        "value" : false,
+        "name" : "Kamera",
+        "topic" : "/home/devices/wohnzimmer/kamera/value",
+        "id" : "kamera"
+      } ],
+      "mqttbroker" : {
+        "username" : "",
+        "host" : "54.186.227.52",
+        "password" : "",
+        "port" : 8000
+      }
+    },
+    "2" : {
+      "devices" : [ {
+        "type" : "on_off",
+        "value" : false,
+        "name" : "Cabinet Light",
+        "topic" : "/home/devices/livingroom/cabinet_light/value",
+        "id" : "cabinet_light"
+      }, {
+        "type" : "thermostat",
+        "value" : 16,
+        "name" : "Livingroom",
+        "topic" : "/home/devices/livingroom/thermostat/value",
+        "id" : "thermostat_livingroom"
+      } ],
+      "mqttbroker" : {
+        "username" : "",
+        "host" : "broker.mqttdashboard.com",
+        "password" : "",
+        "port" : 8000
+      }
+    }
   }
 }

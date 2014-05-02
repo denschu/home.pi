@@ -14,7 +14,7 @@ RUN apt-get install -y nginx
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 ADD default_nginx.conf /etc/nginx/sites-available/default
-ADD app/ /var/www
+ADD www/ /var/www
 
 # Attach volumes.
 VOLUME /etc/nginx/sites-enabled
@@ -23,14 +23,11 @@ VOLUME /var/log/nginx
 # Set working directory.
 WORKDIR /etc/nginx
 
-ADD startup.sh /
-
 # Expose ports.
 EXPOSE 80
 
 ENV BACKEND_URL homepi
 
 # Define default command.
-#ENTRYPOINT ["nginx"]
-CMD ["/startup.sh"]
+CMD ["nginx"]
 

@@ -28,13 +28,11 @@
 	git clone https://github.com/denschu/homepi
 	npm install
 
-* Open app/js/config.js and add your Firebase URL
-
 * Create a Firebase Account
 
 * Place you device configuration in a configuration file e.g. "firebase-config.json" and upload it to your firebase account. See also the example "firebase-config-example.json" for further details.
 
-Example:
+Example configuration:
 
 	{
 	    "type" : "on_off",
@@ -44,22 +42,20 @@ Example:
 	    "id" : "ceiling_light"
   	}
 
-* Build and Run
+* Run with local HTTP Server
+
+Open app/js/config.js and modify the Firebase URL. You can use https://homepi.firebaseio.com for testing
 
 	cd www
 	python -m SimpleHTTPServer 8080
+	mosca --http-port 8000 --http-bundle --verbose | bunyan
 
-or run it with Docker without installation
+* Run with Docker
 
-	docker build -t denschu/homepi .
+	docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db matteocollina/mosca
+	docker run -d -p 80:80 denschu/homepi
 
-	sudo docker run -d -e BACKEND_URL=homepi -p 80:80 denschu/homepi
-
-	sudo boot2docker ssh -L 80:localhost:80 (Password: tcuser)
-
-	docker push denschu/homepi
-
-or build it as native app
+Build and Run it as native app
 
 	sudo npm install -g cordova ionic
 	ionic platform add ios
@@ -94,7 +90,6 @@ At the moment the following "experimental" MQTT bindings are available:
 ## Technologies/Frameworks
 
 * node.js
-* Express (HTTP/Web Server)
 * MQTT
 * Ionic Framework (with AngularJS)
 

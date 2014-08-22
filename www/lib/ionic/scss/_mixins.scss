@@ -12,7 +12,8 @@
     color: $color;
     text-decoration: none;
   }
-  &.active {
+  &.active,
+  &.activated {
     border-color: $active-border-color;
     background-color: $active-bg-color;
     box-shadow: inset 0px 1px 3px rgba(0,0,0,0.15);
@@ -44,7 +45,8 @@
       $text-color: $color;
     }
     color: $text-color;
-    &.active {
+    &.active,
+    &.activated {
       background-color: $color;
       box-shadow: none;
       color: #fff;
@@ -124,12 +126,14 @@
 // --------------------------------------------------
 
 @mixin checkbox-style($off-border-color, $on-bg-color) {
-  & input:before {
-    border: $checkbox-border-width solid $off-border-color;
+  & input:before,
+  & .checkbox-icon:before {
+    border-color: $off-border-color;
   }
 
   // what the background looks like when its checked
-  & input:checked:before {
+  & input:checked:before,
+  & input:checked + .checkbox-icon:before {
     background: $on-bg-color;
   }
 }
@@ -167,8 +171,8 @@
 // Placeholder text
 // --------------------------------------------------
 
-@mixin placeholder($color: $input-color-placeholder) {
-  &:-moz-placeholder {
+@mixin placeholder($color: $input-color-placeholder, $text-indent: 0) {
+  &::-moz-placeholder { /* Firefox 19+ */
     color: $color;
   }
   &:-ms-input-placeholder {
@@ -176,6 +180,8 @@
   }
   &::-webkit-input-placeholder {
     color: $color;
+    // Safari placeholder margin issue
+    text-indent: $text-indent;
   }
 }
 

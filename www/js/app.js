@@ -9,7 +9,13 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','home
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
     if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
@@ -33,11 +39,6 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','home
       templateUrl: "templates/login.html",
       controller: 'LoginCtrl'
     })
-    .state('signup', {
-      url: '/signup',
-      templateUrl: 'templates/signup.html',
-      controller: 'SignupCtrl'
-    })
     // the pet tab has its own child nav-view and history
     .state('devices', {
       url: '/devices',
@@ -50,25 +51,13 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','home
 
 })
 
-.run(function($rootScope, $firebaseSimpleLogin, $state, $window, environment) {
-
-  var dataRef = new Firebase(environment.firebase_url);
-  $rootScope.auth = $firebaseSimpleLogin(dataRef);
-
-  $rootScope.auth.$getCurrentUser().then(function(user) {
-    console.log("Verifying User Session..." + JSON.stringify(user));
-    if(!user){
-      // Might already be handled by logout event below
-      $state.go('login');
-    }
-  }, function(err) {
-  });
-
-  $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
-    $state.go('devices');
-  });
-
-  $rootScope.$on('$firebaseSimpleLogin:logout', function(e, user) {
+.run(function($rootScope, $state, $window, Socket, environment) {
+  console.log("Verifying User Session..." + $rootScope.user);
+  if($rootScope.user == undefined){
     $state.go('login');
-  });
+  }else{
+    Socket.connect($rootScope.user,$rootScope.password);
+    $state.go('devices');
+  }
+
 });

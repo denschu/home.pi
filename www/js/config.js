@@ -4,6 +4,7 @@
 angular.module('homepi.config', [])
 
 .constant('environment', {
-  // your Firebase URL goes here
-  'firebase_url': 'https://homepi.firebaseio.com'
+  //'mqtt_host': 'localhost',
+  'mqtt_host': '54.186.227.52',
+  'mqtt_port': 8000
 });

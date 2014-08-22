@@ -1,24 +1,20 @@
-angular.module('homepi.services', ['homepi.config','ngResource','firebase'])
+angular.module('homepi.services', ['homepi.config','ngResource'])
 
-.factory('Socket', function($rootScope, $firebase, environment) {
+.factory('Socket', function($rootScope, environment) {
 
     var service = {};
     var client = {};
 
-    service.connect = function(devices) {
-        var mqttbroker = new Firebase(environment.firebase_url + '/users/' + $rootScope.auth.user.id + '/mqttbroker');
-        mqttbroker.on('value', function(value) {
-            client = mqtt.createClient(value.val().port,value.val().host);
-            console.log("Succeeded to open a connection to MQTT Broker...");
-            angular.forEach(devices, function(device) {
-                if(device.topic != null){
-                    console.log(device.topic);
-                    client.subscribe(""+device.topic+""); 
-                }
-            });
-            client.on('message', function (topic, message) {
-              service.callback(topic,message);
-            });
+    service.connect = function(user, password) {
+        var options = {
+          username: user,
+          password: password
+        };
+        client = mqtt.createClient(environment.mqtt_port,environment.mqtt_host,options);
+        console.log("Try to connect to MQTT Broker " +environment.mqtt_host + " with user " + user);
+        client.subscribe("/#"); 
+        client.on('message', function (topic, message) {
+          service.callback(topic,message);
         });
     }
 

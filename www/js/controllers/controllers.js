@@ -6,24 +6,15 @@ angular.module('homepi.controllers', ['homepi.config'])
   // Main app controller, empty for the example
 })
 
-.controller('DeviceListCtrl', function($scope, $rootScope, $firebaseSimpleLogin, $firebase, Socket, environment) {
+.controller('DeviceListCtrl', function($scope, $state, $rootScope, Socket, environment) {
 
   $scope.devices = {};
 
-  $rootScope.auth.$getCurrentUser().then(function(user) {
-      if(user){
-        $scope.devices = $firebase(new Firebase(environment.firebase_url + '/users/' + $rootScope.auth.user.id + '/devices'));
-        $scope.connect();
-      }
-    }, function(err) {
-  });
-
-  $scope.connect = function () {
-      Socket.connect($scope.devices);
-  };
-
   $scope.logout = function() {
-    $rootScope.auth.$logout();
+    console.info('Successfully logged out ' + $rootScope.user);
+    $rootScope.user == null;
+    $rootScope.password == null;
+    $state.go('login');
   };
 
   $scope.change = function (device) {
@@ -37,6 +28,13 @@ angular.module('homepi.controllers', ['homepi.config'])
 
   Socket.onMessage(function(topic, payload) {
     console.log('incoming topic: ' + topic + ' and payload: ' + payload);
+
+    var splitTopic = topic.split("/");
+    if(splitTopic[2] == 'config'){
+        console.log('Load device configuration from MQTT...' + payload);
+        $scope.devices = JSON.parse(payload);
+    }
+    
     angular.forEach($scope.devices, function(device) {
         //Search for corresponding device and update the value
         if(device.topic == topic){
@@ -56,7 +54,7 @@ angular.module('homepi.controllers', ['homepi.config'])
 
 })
 
-.controller('LoginCtrl', function($scope, $rootScope, $ionicPopup, $firebaseSimpleLogin, environment) {
+.controller('LoginCtrl', function($state, $scope, $rootScope, $ionicPopup, Socket, environment) {
   $scope.loginData = {};
 
   $scope.showAlert = function() {
@@ -69,20 +67,22 @@ angular.module('homepi.controllers', ['homepi.config'])
         };
 
   $scope.tryLogin = function() {
-    $rootScope.auth.$login('password', {email: $scope.loginData.email,password: $scope.loginData.password,rememberMe: true}).then(function(user) {
-      // The root scope event will trigger and navigate
-      console.info('Successfully logged in ' + user.id);
-    }, function(error) {
-      // Show a form error here
-      console.error('Unable to login', error);
-      $scope.showAlert();
-    });
+    if($scope.loginData.email){
+        console.info('Successfully logged in ' + $scope.loginData.email);
+        $rootScope.user == $scope.loginData.email;
+        $rootScope.password == $scope.loginData.password;
+        Socket.connect($scope.loginData.email,$scope.loginData.password);
+        $state.go('devices');
+    }else{
+        $scope.showAlert();
+    }
+
   };
 
   $scope.logout = function() {
-    $rootScope.auth.$logout();
+    console.info('Successfully logged out ' + $rootScope.user);
+    $rootScope.user == null;
+    $rootScope.password == null;
+    $state.go('login');
   };
-})
-
-.controller('SignupCtrl', function($scope) {
 });

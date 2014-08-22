@@ -4,13 +4,11 @@
 
 * Simple Home Automation Solution with MQTT
 
-[Demo Application](https://homepi.firebaseapp.com/)
-
-## Features
+## Facts
 
 * Home Automation with MQTT
+* Cloud-based Micro Service Architecture (only the bindings to control the devices are running locally)
 * Completely independent from the used technology (most bindings are actually written in node.js)
-* Cloud-based architecture (only the bindings to control the devices are running locally)
 
 ## System Architecture
 
@@ -26,11 +24,12 @@
 * Clone the repository and install the dependencies
 
 	git clone https://github.com/denschu/homepi
+
 	npm install
 
-* Create a Firebase Account
+* Publish your configuration to MQTT with the topic "/home/config"
 
-* Place you device configuration in a configuration file e.g. "firebase-config.json" and upload it to your firebase account. See also the example "firebase-config-example.json" for further details.
+See publish-config.sh
 
 Example configuration:
 
@@ -44,7 +43,7 @@ Example configuration:
 
 * Run with local HTTP Server
 
-Open app/js/config.js and modify the Firebase URL. You can use https://homepi.firebaseio.com for testing
+Open app/js/config.js and modify the MQTT URL.
 
 	cd www
 	python -m SimpleHTTPServer 8080
@@ -52,7 +51,7 @@ Open app/js/config.js and modify the Firebase URL. You can use https://homepi.fi
 
 * Run with Docker
 
-	docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db matteocollina/mosca
+	docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db denschu/mosca-secure
 	docker run -d -p 80:80 denschu/homepi
 
 Build and Run it as native app

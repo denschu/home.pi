@@ -1,7 +1,5 @@
-{
-  "users" : {
-    "1" : {
-      "devices" : [ {
+#!/bin/sh
+mosquitto_pub -h 54.186.227.52 -u denschu -P denschu -p 1883 -t /home/config -m '[ {
         "type" : "on_off",
         "value" : false,
         "name" : "Stehlampe Wand",
@@ -49,34 +47,4 @@
         "name" : "Kamera",
         "topic" : "/home/devices/wohnzimmer/kamera/value",
         "id" : "kamera"
-      } ],
-      "mqttbroker" : {
-        "username" : "",
-        "host" : "54.186.227.52",
-        "password" : "",
-        "port" : 8000
-      }
-    },
-    "2" : {
-      "devices" : [ {
-        "type" : "on_off",
-        "value" : false,
-        "name" : "Cabinet Light",
-        "topic" : "/home/devices/livingroom/cabinet_light/value",
-        "id" : "cabinet_light"
-      }, {
-        "type" : "thermostat",
-        "value" : 16,
-        "name" : "Livingroom",
-        "topic" : "/home/devices/livingroom/thermostat/value",
-        "id" : "thermostat_livingroom"
-      } ],
-      "mqttbroker" : {
-        "username" : "",
-        "host" : "broker.mqttdashboard.com",
-        "password" : "",
-        "port" : 8000
-      }
-    }
-  }
-}
+      } ]' -r

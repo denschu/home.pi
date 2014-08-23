@@ -69,8 +69,8 @@ angular.module('homepi.controllers', ['homepi.config'])
   $scope.tryLogin = function() {
     if($scope.loginData.email){
         console.info('Successfully logged in ' + $scope.loginData.email);
-        $rootScope.user == $scope.loginData.email;
-        $rootScope.password == $scope.loginData.password;
+        window.localStorage['user'] = $scope.loginData.email;
+        window.localStorage['password'] = $scope.loginData.password;
         Socket.connect($scope.loginData.email,$scope.loginData.password);
         $state.go('devices');
     }else{
@@ -81,8 +81,8 @@ angular.module('homepi.controllers', ['homepi.config'])
 
   $scope.logout = function() {
     console.info('Successfully logged out ' + $rootScope.user);
-    $rootScope.user == null;
-    $rootScope.password == null;
+    window.localStorage['user'] = undefined;
+    window.localStorage['password'] = undefined;
     $state.go('login');
   };
 });

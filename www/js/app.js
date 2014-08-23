@@ -52,11 +52,13 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','home
 })
 
 .run(function($rootScope, $state, $window, Socket, environment) {
-  console.log("Verifying User Session..." + $rootScope.user);
-  if($rootScope.user == undefined){
+  console.log("Verifying User Session..." + window.localStorage['user']);
+  if(window.localStorage['user'] == undefined){
+    console.log('Going to login');
     $state.go('login');
   }else{
-    Socket.connect($rootScope.user,$rootScope.password);
+    console.log('Going to devices');
+    Socket.connect(window.localStorage['user'],window.localStorage['password']);
     $state.go('devices');
   }
 

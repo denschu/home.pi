@@ -12,8 +12,8 @@ angular.module('homepi.controllers', ['homepi.config'])
 
   $scope.logout = function() {
     console.info('Successfully logged out ' + $rootScope.user);
-    $rootScope.user == null;
-    $rootScope.password == null;
+    window.localStorage['user'] = undefined;
+    window.localStorage['password'] = undefined;
     $state.go('login');
   };
 

@@ -17,19 +17,17 @@
 ## Installation
 
 * Install a MQTT Broker with Websocket Support, e.g.
+
 	* [HiveMQ](http://www.hivemq.com/)
 	* [Mosquitto](http://mosquitto.org/) with [https://github.com/stylpen/WSS]
 	* [Mosca](http://www.mosca.io/)
 
-* Clone the repository and install the dependencies
+* Clone the repository and install the dependencies with NPM
 
 	git clone https://github.com/denschu/homepi
-
 	npm install
 
-* Publish your configuration to MQTT with the topic "/home/config"
-
-See publish-config.sh
+* Publish your configuration to MQTT with the topic "/home/config" (see publish-config.sh)
 
 Example configuration:
 

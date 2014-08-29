@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/denschu/home.pi.png)](https://travis-ci.org/denschu/home.pi)
 
-* Simple Home Automation Solution with MQTT
+Simple Home Automation solution with MQTT
 
 ## Facts
 
@@ -17,7 +17,6 @@
 ## Installation
 
 * Install a MQTT Broker with Websocket Support, e.g.
-
 	* [HiveMQ](http://www.hivemq.com/)
 	* [Mosquitto](http://mosquitto.org/) with [https://github.com/stylpen/WSS]
 	* [Mosca](http://www.mosca.io/)
@@ -27,49 +26,57 @@
 	git clone https://github.com/denschu/homepi
 	npm install
 
-* Publish your configuration to MQTT with the topic "/home/config" (see publish-config.sh)
+* Publish your configuration to MQTT with the topic "username/home/config" (see publish-config.sh)
 
 Example configuration:
 
-	{
-	    "type" : "on_off",
-	    "value" : false,
-	    "name" : "Ceiling Light",
-	    "topic" : "/home/devices/livingroom/ceiling_light/value",
-	    "id" : "ceiling_light"
-  	}
+```json
+{
+	"id" : "ceiling_light",
+	"type" : "on_off",
+	"value" : false,
+	"name" : "Ceiling Light",
+	"topic" : "/home/devices/livingroom/ceiling_light/value"
+}
+```
 
 * Run with local HTTP Server
 
 Open app/js/config.js and modify the MQTT URL.
 
-	cd www
-	python -m SimpleHTTPServer 8080
-	mosca --http-port 8000 --http-bundle --verbose | bunyan
+```shell
+cd www
+python -m SimpleHTTPServer 8080
+mosca --http-port 8000 --http-bundle --verbose | bunyan
+```
 
 * Run with Docker
 
-	docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db denschu/mosca-secure
-	docker run -d -p 80:80 denschu/homepi
+```shell
+docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db denschu/mosca-secure
+docker run -d -p 80:80 denschu/homepi
+```
 
 Build and Run it as native app
 
-	sudo npm install -g cordova ionic
-	ionic platform add ios
-	ionic build ios
-	ionic emulate ios
+```shell
+sudo npm install -g cordova ionic
+ionic platform add ios
+ionic build ios
+ionic emulate ios
+```
 
 ## MQTT topic conventions
 
 Subscribe to a topic for getting the value of a device
 
-	/home/devices/<room>/<device-name>/state
-	/home/devices/living_room/light1/state
+	<username>/home/devices/<room>/<device-name>/state
+	denschu/home/devices/living_room/light1/state
 
 Publish to a topic for setting the value of a device
 
-	/home/devices/<room>/<device-name>/state/set <value>
-	/home/devices/living_room/light1/state/set true
+	<username>/home/devices/<room>/<device-name>/state/set <value>
+	denschu/home/devices/living_room/light1/state/set true
 
 ## Available MQTT Bindings (separate git-Repositories)
 
@@ -90,4 +97,4 @@ At the moment the following "experimental" MQTT bindings are available:
 * MQTT
 * Ionic Framework (with AngularJS)
 
-For further informations and setup instructions please refer to my [blog posts](http://blog.codecentric.de/en/).
+For further informations please refer to my [blog posts](http://blog.codecentric.de/en/).

@@ -1,17 +1,19 @@
 'use strict';
 
-angular.module('homepi.controllers', ['homepi.config'])
+angular.module('homepi.controllers', [])
 
 .controller('AppCtrl', function($scope) {
   // Main app controller, empty for the example
 })
 
-.controller('DeviceListCtrl', function($scope, $state, $rootScope, Socket, environment) {
+.controller('DeviceListCtrl', function($scope, $state, $rootScope, Socket) {
 
   $scope.devices = {};
 
   $scope.logout = function() {
-    console.info('Successfully logged out ' + $rootScope.user);
+    console.info('Successfully logged out ' + window.localStorage['user']);
+    window.localStorage['host'] = undefined;
+    window.localStorage['port'] = undefined;
     window.localStorage['user'] = undefined;
     window.localStorage['password'] = undefined;
     $state.go('login');
@@ -54,7 +56,7 @@ angular.module('homepi.controllers', ['homepi.config'])
 
 })
 
-.controller('LoginCtrl', function($state, $scope, $rootScope, $ionicPopup, Socket, environment) {
+.controller('LoginCtrl', function($state, $scope, $rootScope, $ionicPopup, Socket) {
   $scope.loginData = {};
 
   $scope.showAlert = function() {
@@ -69,9 +71,11 @@ angular.module('homepi.controllers', ['homepi.config'])
   $scope.tryLogin = function() {
     if($scope.loginData.user){
         console.info('Successfully logged in ' + $scope.loginData.user);
+        window.localStorage['host'] = $scope.loginData.host;
+        window.localStorage['port'] = $scope.loginData.port;
         window.localStorage['user'] = $scope.loginData.user;
         window.localStorage['password'] = $scope.loginData.password;
-        Socket.connect($scope.loginData.user,$scope.loginData.password);
+        Socket.connect($scope.loginData.host,$scope.loginData.port,$scope.loginData.user,$scope.loginData.password);
         $state.go('devices');
     }else{
         $scope.showAlert();
@@ -80,7 +84,9 @@ angular.module('homepi.controllers', ['homepi.config'])
   };
 
   $scope.logout = function() {
-    console.info('Successfully logged out ' + $rootScope.user);
+    console.info('Successfully logged out ' + window.localStorage['user']);
+    window.localStorage['host'] = undefined;
+    window.localStorage['port'] = undefined;
     window.localStorage['user'] = undefined;
     window.localStorage['password'] = undefined;
     $state.go('login');

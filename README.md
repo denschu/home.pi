@@ -8,7 +8,9 @@ Simple Home Automation solution with MQTT
 
 * Home Automation with MQTT
 * Cloud-based Micro Service Architecture (only the bindings to control the devices are running locally)
-* Completely independent from the used technology (most bindings are actually written in node.js)
+* Completely independent from the used technology (btw. most bindings are actually written in node.js)
+
+![Screenshot](screenshot.png)
 
 ## System Architecture
 
@@ -16,15 +18,20 @@ Simple Home Automation solution with MQTT
 
 ## Installation
 
-* Install a MQTT Broker with Websocket Support, e.g.
+* Install and start a MQTT Broker with Websocket Support, e.g.
 	* [HiveMQ](http://www.hivemq.com/)
 	* [Mosquitto](http://mosquitto.org/) with [https://github.com/stylpen/WSS]
 	* [Mosca](http://www.mosca.io/)
 
 * Clone the repository and install the dependencies with NPM
 
+```shell
 	git clone https://github.com/denschu/homepi
+	cd homepi
+	sudo npm install -g cordova ionic gulp
 	npm install
+	gulp install
+```
 
 * Publish your configuration to MQTT with the topic "username/home/config" (see publish-config.sh)
 
@@ -36,13 +43,11 @@ Example configuration:
 	"type" : "on_off",
 	"value" : false,
 	"name" : "Ceiling Light",
-	"topic" : "/home/devices/livingroom/ceiling_light/value"
+	"topic" : "denschu/home/devices/livingroom/ceiling_light/value"
 }
 ```
 
 * Run with local HTTP Server
-
-Open app/js/config.js and modify the MQTT URL.
 
 ```shell
 cd www
@@ -50,14 +55,16 @@ python -m SimpleHTTPServer 8080
 mosca --http-port 8000 --http-bundle --verbose | bunyan
 ```
 
-* Run with Docker
+Open http://localhost:8080 in a webbrowser and provide your credentials to connect to the MQTT Broker.
+
+* Run the complete stack with Docker
 
 ```shell
 docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db denschu/mosca-secure
 docker run -d -p 80:80 denschu/homepi
 ```
 
-Build and Run it as native app
+* Build and Run it as native app
 
 ```shell
 sudo npm install -g cordova ionic
@@ -68,15 +75,15 @@ ionic emulate ios
 
 ## MQTT topic conventions
 
-Subscribe to a topic for getting the value of a device
+When you create the above device configuration for the GUI then you always define the topics it will subscribe to.
 
-	<username>/home/devices/<room>/<device-name>/state
-	denschu/home/devices/living_room/light1/state
+	<username>/home/devices/<room>/<device-name>/value
+	denschu/home/devices/living_room/light1/value
 
-Publish to a topic for setting the value of a device
+The GUI application will always add a "/set" to the topicname from above when it publishes a message. The payload of the message contains the value to set on the device.
 
-	<username>/home/devices/<room>/<device-name>/state/set <value>
-	denschu/home/devices/living_room/light1/state/set true
+	<username>/home/devices/<room>/<device-name>/value/set <value>
+	denschu/home/devices/living_room/light1/value/set true
 
 ## Available MQTT Bindings (separate git-Repositories)
 
@@ -93,8 +100,8 @@ At the moment the following "experimental" MQTT bindings are available:
 
 ## Technologies/Frameworks
 
-* node.js
 * MQTT
 * Ionic Framework (with AngularJS)
+* node.js
 
 For further informations please refer to my [blog posts](http://blog.codecentric.de/en/).

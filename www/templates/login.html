@@ -5,6 +5,12 @@
   <form ng-submit="tryLogin()">
     <div class="list">
       <label class="item item-input">
+        <input type="text" placeholder="MQTT Hostname" ng-model="loginData.host">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="MQTT Port" ng-model="loginData.port">
+      </label>    
+      <label class="item item-input">
         <input type="text" placeholder="Username" ng-model="loginData.user">
       </label>
       <label class="item item-input">

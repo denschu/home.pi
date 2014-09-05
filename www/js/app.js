@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','homepi.config'])
+angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -51,14 +51,14 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers','home
 
 })
 
-.run(function($rootScope, $state, $window, Socket, environment) {
+.run(function($rootScope, $state, $window, Socket) {
   console.log("Verifying User Session..." + window.localStorage['user']);
-  if(window.localStorage['user'] == undefined){
+  if(window.localStorage['user'] == 'undefined'){
     console.log('Going to login');
     $state.go('login');
   }else{
     console.log('Going to devices');
-    Socket.connect(window.localStorage['user'],window.localStorage['password']);
+    Socket.connect(window.localStorage['host'],window.localStorage['port'],window.localStorage['user'],window.localStorage['password']);
     $state.go('devices');
   }
 

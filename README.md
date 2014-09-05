@@ -10,6 +10,8 @@ Simple Home Automation solution with MQTT
 * Cloud-based Micro Service Architecture (only the bindings to control the devices are running locally)
 * Completely independent from the used technology (btw. most bindings are actually written in node.js)
 
+## Screenshot
+
 ![Screenshot](screenshot.png)
 
 ## System Architecture

@@ -11,11 +11,8 @@ angular.module('homepi.controllers', [])
   $scope.devices = {};
 
   $scope.logout = function() {
-    console.info('Successfully logged out ' + window.localStorage['user']);
-    window.localStorage['host'] = undefined;
-    window.localStorage['port'] = undefined;
-    window.localStorage['user'] = undefined;
-    window.localStorage['password'] = undefined;
+    console.log('Successfully logged out ' + window.localStorage['user']);
+    window.localStorage.clear();
     $state.go('login');
   };
 
@@ -69,13 +66,14 @@ angular.module('homepi.controllers', [])
         };
 
   $scope.tryLogin = function() {
+    console.log('Try to log in ' + $scope.loginData.user);
     if($scope.loginData.user){
-        console.info('Successfully logged in ' + $scope.loginData.user);
-        window.localStorage['host'] = $scope.loginData.host;
-        window.localStorage['port'] = $scope.loginData.port;
-        window.localStorage['user'] = $scope.loginData.user;
-        window.localStorage['password'] = $scope.loginData.password;
+        window.localStorage.setItem('host',$scope.loginData.host);
+        window.localStorage.setItem('port',$scope.loginData.port);
+        window.localStorage.setItem('user',$scope.loginData.user);
+        window.localStorage.setItem('password',$scope.loginData.password);
         Socket.connect($scope.loginData.host,$scope.loginData.port,$scope.loginData.user,$scope.loginData.password);
+        console.log('Successfully logged in ' + $scope.loginData.user);
         $state.go('devices');
     }else{
         $scope.showAlert();
@@ -84,11 +82,8 @@ angular.module('homepi.controllers', [])
   };
 
   $scope.logout = function() {
-    console.info('Successfully logged out ' + window.localStorage['user']);
-    window.localStorage['host'] = undefined;
-    window.localStorage['port'] = undefined;
-    window.localStorage['user'] = undefined;
-    window.localStorage['password'] = undefined;
+    console.log('Successfully logged out ' + window.localStorage['user']);
+    window.localStorage.clear();
     $state.go('login');
   };
 });

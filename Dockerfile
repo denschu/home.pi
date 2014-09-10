@@ -26,8 +26,6 @@ WORKDIR /etc/nginx
 # Expose ports.
 EXPOSE 80
 
-ENV BACKEND_URL homepi
-
 # Define default command.
 CMD ["nginx"]
 

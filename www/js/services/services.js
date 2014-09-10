@@ -13,6 +13,12 @@ angular.module('homepi.services', ['ngResource'])
         console.log("Try to connect to MQTT Broker " + host + " with user " + user);
         client = mqtt.createClient(parseInt(port),host,options);
         client.subscribe(user+"/#"); 
+
+        client.on('error', function(err) {
+            console.log('error!', err);
+            client.stream.end();
+        });
+
         client.on('message', function (topic, message) {
           service.callback(topic,message);
         });

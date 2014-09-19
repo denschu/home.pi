@@ -67,7 +67,7 @@ angular.module('homepi.controllers', [])
 
   $scope.tryLogin = function() {
     console.log('Try to log in ' + $scope.loginData.user);
-    if($scope.loginData.user){
+    if($scope.loginData.host && $scope.loginData.port){
         window.localStorage.setItem('host',$scope.loginData.host);
         window.localStorage.setItem('port',$scope.loginData.port);
         window.localStorage.setItem('user',$scope.loginData.user);

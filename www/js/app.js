@@ -57,7 +57,7 @@ angular.module('homepi', ['ionic', 'homepi.services', 'homepi.controllers'])
   var user = window.localStorage['user'];
   var password = window.localStorage['password'];
   console.log("Verifying User Session..." + user);
-  if(user == null){
+  if(host == null && port == null){
     console.log('Going to login');
     $state.go('login');
   }else{

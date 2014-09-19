@@ -56,8 +56,16 @@ cd www
 python -m SimpleHTTPServer 8080
 mosca --http-port 8000 --http-bundle --verbose | bunyan
 ```
-
 Open http://localhost:8080 in a webbrowser and provide your credentials to connect to the MQTT Broker.
+
+* Run it as native app
+
+```shell
+sudo npm install -g cordova ionic
+ionic platform add ios
+ionic build ios
+ionic emulate ios
+```
 
 * Run the complete stack with Docker
 
@@ -66,14 +74,7 @@ docker run -p 1883:1883 -p 8000:8000 -v /var/db/mosca:/db denschu/mosca-secure
 docker run -d -p 80:80 denschu/homepi
 ```
 
-* Build and Run it as native app
 
-```shell
-sudo npm install -g cordova ionic
-ionic platform add ios
-ionic build ios
-ionic emulate ios
-```
 
 ## MQTT topic conventions
 

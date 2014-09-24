@@ -107,4 +107,8 @@ At the moment the following "experimental" MQTT bindings are available:
 * Ionic Framework (with AngularJS)
 * node.js
 
-For further informations please refer to my [blog posts](http://blog.codecentric.de/en/).
+For further informations please refer to my [blog posts](https://blog.codecentric.de/en/author/dsc/):
+* [Home.Pi Reloaded – Home Automation with Ionic and MQTT](https://blog.codecentric.de/en/2014/09/home-pi-reloaded-home-automation-ionic-mqtt)
+* [Home Automation with AngularJS and node.js on a Raspberry Pi](https://blog.codecentric.de/en/2013/03/home-automation-with-angularjs-and-node-js-on-a-raspberry-pi/)
+
+

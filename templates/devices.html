@@ -1,0 +1,35 @@
+<ion-header-bar align-title="left" class="bar-dark">
+  <h1 class="title">Home.Pi</h1>
+  <div class="buttons">
+    <button class="button" ng-click="logout()">Logout</button>
+  </div>
+</ion-header-bar>
+<ion-content>
+  <ion-list>
+    <div class="item item-toggle item-icon-left" ng-repeat="device in devices | filter:'on_off'">
+        <i class="icon ion-ios7-lightbulb-outline"></i>
+        {{ device.name }}
+        <label class="toggle">
+          <input type="checkbox" ng-model="device.value" ng-change="change(device)">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+    </div>
+    <div class="item range range-energized" ng-repeat="device in devices | filter:'dimmer'">
+        <i class="icon ion-ios7-lightbulb-outline"></i>
+        {{ device.name }}
+        <input type="range" name="volume" min="0" step="10" max="100" ng-model="device.value" ng-change="change(device)">
+        <i class="icon ion-ios7-lightbulb"></i>
+        {{ device.value }} 
+    </div>
+    <div class="item range range-assertive" ng-repeat="device in devices | filter:'thermostat'">
+        <i class="icon ion-ios7-sunny-outline"></i>
+        {{ device.name }}
+        <input type="range" name="volume" min="15" max="25" ng-model="device.value" ng-change="change(device)">
+        <i class="icon ion-ios7-sunny"></i>
+        {{ device.value }} 
+    </div>
+  </ion-list>
+</ion-content>
+

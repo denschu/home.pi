@@ -1,5 +1,5 @@
 #!/bin/sh
-mosquitto_pub -h 54.186.227.52 -u denschu -P secret -p 1883 -t denschu/home/config -m '[ {
+mosquitto_pub -h m10.cloudmqtt.com -u secret -P secret -p 16585 -t denschu/home/config -m '[ {
         "type" : "on_off",
         "value" : false,
         "name" : "Floorlamp 1",

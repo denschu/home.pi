@@ -7,10 +7,10 @@ if ! (git remote set-branches --add origin gh-pages && git fetch -q); then
     exit 0
 fi
 
-if ! [ -d wwww ]; then
-    echo "No gh-pages sources in www, so not syncing"
-    exit 0
-fi
+#if ! [ -d wwww ]; then
+#    echo "No gh-pages sources in www, so not syncing"
+#    exit 0
+#fi
 
 # Stash any outstanding changes
 ###################################################################
